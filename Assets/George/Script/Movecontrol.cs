@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,9 +12,9 @@ public class MoveControl : MonoBehaviour
 
     [SerializeField] Vector3 _Move;
     [SerializeField] Rigidbody2D _rb;
-    [SerializeField] float speed;
+    [SerializeField] float _speed;
     bool _facingRight;
-
+    bool _facingUp;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +27,7 @@ public class MoveControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _rb.velocity = new Vector2(_Move.x * speed, _rb.velocity.y);
+        _rb.velocity = new Vector2(_Move.x , _Move.y) *_speed;
 
         if (_Move.x > 0 && _facingRight == true)
         {
@@ -39,6 +40,24 @@ public class MoveControl : MonoBehaviour
 
             flip();
         }
+
+        if (_Move.y < 0 && _facingUp == true)
+        {
+            flipY();
+
+        }
+
+        else if (_Move.y > 0 && _facingUp == false)
+        {
+
+            flipY();
+        }
+
+
+
+
+
+
 
     }
 
@@ -60,7 +79,17 @@ public class MoveControl : MonoBehaviour
 
 
     }
+    void flipY()
+    {
 
+        _facingUp = !_facingUp;
+        float y = transform.localScale.y;
+        y *= -1;
+
+        transform.localScale = new Vector2(transform.localScale.x,  y);
+
+
+    }
 
 
 }
