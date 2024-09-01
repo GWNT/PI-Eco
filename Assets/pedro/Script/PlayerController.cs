@@ -22,11 +22,16 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
+        movement = movement.normalized;
+
         Debug.Log($"Movement: {movement}, Speed: {movement.sqrMagnitude}");
+
+        
     }
 
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+
     }
 }
