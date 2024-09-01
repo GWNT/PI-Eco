@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
+
+        Debug.Log($"Movement: {movement}, Speed: {movement.sqrMagnitude}");
     }
 
     void FixedUpdate()
