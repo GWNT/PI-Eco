@@ -22,6 +22,12 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
+        if(Input.GetAxisRaw("Horizontal")==1 || Input.GetAxisRaw("Horizontal")==-1 || Input.GetAxisRaw("Vertical")==1 || Input.GetAxisRaw("Vertical")==-1)
+        {
+            animator.SetFloat("LastHorizontal", Input.GetAxisRaw("Horizontal"));
+            animator.SetFloat("LastVertical", Input.GetAxisRaw("Vertical"));
+        }
+
         movement = movement.normalized;
 
         Debug.Log($"Movement: {movement}, Speed: {movement.sqrMagnitude}");
