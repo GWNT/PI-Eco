@@ -2,43 +2,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+
+public class PlayerController : MonoBehaviour
 {
-    
-    [SerializeField]    Rigidbody2D rb;
+    [SerializeField] Rigidbody2D rb;
+    public float moveSpeed = 5f;
+    public Animator animator;
 
-    public float        moveSpeed = 5f;
+    Vector2 movement;
 
-    public Animator     animator;
-
-    Vector2             movement;
-    
-    
     void Update()
     {
+        // Captura o input do jogador
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
+        // Atualiza a animação de movimento
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
-        if(Input.GetAxisRaw("Horizontal")==1 || Input.GetAxisRaw("Horizontal")==-1 || Input.GetAxisRaw("Vertical")==1 || Input.GetAxisRaw("Vertical")==-1)
+        if (movement != Vector2.zero)
         {
-            animator.SetFloat("LastHorizontal", Input.GetAxisRaw("Horizontal"));
-            animator.SetFloat("LastVertical", Input.GetAxisRaw("Vertical"));
+            animator.SetFloat("LastHorizontal", movement.x);
+            animator.SetFloat("LastVertical", movement.y);
         }
 
         movement = movement.normalized;
 
-        Debug.Log($"Movement: {movement}, Speed: {movement.sqrMagnitude}");
+        // Chama o método de ataque quando a tecla "Space" é pressionada
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Attack();
+        }
 
-        
+        Debug.Log($"Movement: {movement}, Speed: {movement.sqrMagnitude}");
     }
 
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+    }
 
+    void Attack()
+    {
+        // Dispara a animação de ataque
+        animator.SetTrigger("Attack");
     }
 }
+
