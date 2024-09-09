@@ -5,11 +5,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] Rigidbody2D rb;
-    public float moveSpeed = 5f;
-    public Animator animator;
-
-    Vector2 movement;
+    [SerializeField]    Rigidbody2D rb;
+    public float        moveSpeed = 5f;
+    public Animator     animator;
+    Vector2             movement;
 
     void Update()
     {
@@ -29,14 +28,9 @@ public class PlayerController : MonoBehaviour
         }
 
         movement = movement.normalized;
-
-        // Chama o método de ataque quando a tecla "Space" é pressionada
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Attack();
-        }
-
         Debug.Log($"Movement: {movement}, Speed: {movement.sqrMagnitude}");
+
+        
     }
 
     void FixedUpdate()
@@ -44,10 +38,6 @@ public class PlayerController : MonoBehaviour
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
 
-    void Attack()
-    {
-        // Dispara a animação de ataque
-        animator.SetTrigger("Attack");
-    }
+    
 }
 
