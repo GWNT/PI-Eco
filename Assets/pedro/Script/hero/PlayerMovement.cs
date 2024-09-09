@@ -2,35 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]    Rigidbody2D rb;
-    public float        moveSpeed = 5f;
-    public Animator     animator;
-    Vector2             movement;
+    [SerializeField]    private     Rigidbody2D rb;
+    public              float       moveSpeed = 5f;
+    public              Animator    animator;
+
+    private Vector2 movement;
 
     void Update()
     {
-        // Captura o input do jogador
+        // Captura o input de movimento
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
-        // Atualiza a animação de movimento
+        // Atualiza os parâmetros do Animator para movimento
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
-        if (movement != Vector2.zero)
+        // Atualiza os parâmetros para a última direção de movimento
+        if (movement.x != 0 || movement.y != 0)
         {
             animator.SetFloat("LastHorizontal", movement.x);
             animator.SetFloat("LastVertical", movement.y);
         }
 
         movement = movement.normalized;
-        Debug.Log($"Movement: {movement}, Speed: {movement.sqrMagnitude}");
 
-        
+        // Verifica se o botão de ataque foi pressionado
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Attack();
+        }
+
+        Debug.Log($"Movement: {movement}, Speed: {movement.sqrMagnitude}");
     }
 
     void FixedUpdate()
@@ -38,6 +44,11 @@ public class PlayerController : MonoBehaviour
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
 
-    
+    void Attack()
+    {
+        // Ativa o trigger de ataque
+        animator.SetTrigger("Attack");
+    }
 }
+
 
