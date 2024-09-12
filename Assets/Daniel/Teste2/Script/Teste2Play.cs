@@ -52,7 +52,7 @@ public class Teste2Play : MonoBehaviour
         if (_canMove)
         {
             // Move o player se ele puder se mover
-            _rb.MovePosition(_rb.position + _move * _speed * Time.fixedDeltaTime);
+            _rb.MovePosition(_rb.position + _move.normalized * _speed * Time.fixedDeltaTime);
         }
     }
 
