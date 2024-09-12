@@ -5,10 +5,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]    private     Rigidbody2D rb;
+
     public              float       moveSpeed = 5f;
+
     public              Animator    animator;
 
-    private Vector2 movement;
+    private             Vector2     movement;
 
     void Update()
     {
@@ -30,13 +32,7 @@ public class PlayerController : MonoBehaviour
 
         movement = movement.normalized;
 
-        // Verifica se o botão de ataque foi pressionado
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Attack();
-        }
-
-        Debug.Log($"Movement: {movement}, Speed: {movement.sqrMagnitude}");
+        
     }
 
     void FixedUpdate()
@@ -44,11 +40,7 @@ public class PlayerController : MonoBehaviour
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
 
-    void Attack()
-    {
-        // Ativa o trigger de ataque
-        animator.SetTrigger("Attack");
-    }
+    
 }
 
 
