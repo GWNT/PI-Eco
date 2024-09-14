@@ -32,14 +32,19 @@ public class MenuControl : MonoBehaviour
     {
         for (int i = 0; i < menu1.Count; i++)
         {
-            menu1[i].DOScale(1f, 1.5f);
+            menu1[i].DOScale(1.5f, .25f);
             yield return new WaitForSeconds(.25f);
+            menu1[i].DOScale(1f, .25f);
+
         }
+
          
         for (int i = 0; i < menu2.Count; i++)
         {
-            menu2[i].DOScale(0.5195122f, 1.5f);
+            menu2[i].DOScale(1f, .25f);
             yield return new WaitForSeconds(.25f);
+            menu2[i].DOScale(0.51f, .25f);
+
         }
            
     }
