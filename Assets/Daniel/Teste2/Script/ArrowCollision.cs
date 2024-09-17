@@ -9,7 +9,8 @@ public class ArrowCollision : MonoBehaviour
         //Debug.Log("Flecha colidiu com : " + collision.gameObject.name);
         if(collision.gameObject.CompareTag("Player") == false)
         {
-            Destroy(gameObject);
+            // Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

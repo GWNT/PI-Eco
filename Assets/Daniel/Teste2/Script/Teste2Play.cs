@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Pool;
 
 public class Teste2Play : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class Teste2Play : MonoBehaviour
     public float _speed;
     Rigidbody2D _rb;
     [SerializeField] Vector2 _move;
-    private Vector2 _lastMoveDirection; // armazena a última direção válida
+    [SerializeField] private Vector2 _lastMoveDirection; // armazena a última direção válida
     public bool _andando;
     private bool _canMove = true; // controla se o player pode se mover
     private Vector2 _storedMove; // armazena a entrada de movimento enquanto o movimento está bloqueado
@@ -22,6 +23,7 @@ public class Teste2Play : MonoBehaviour
     public float _arrowSpeed = 10f; // velocidade da flecha
     public float _shootCooldown = 0.5f; // intervalo de tempo entre os disparos
     private bool _canShoot = true; // controla se o player pode disparar
+    [SerializeField] Vector2 shootDirection; // direção do disparo
 
     void Start()
     {
@@ -45,6 +47,18 @@ public class Teste2Play : MonoBehaviour
             }
             _anim.SetBool("Andando", _andando);
         }
+
+        // teste novo instanciamento de prefab
+        /* if (Input.GetKeyDown(KeyCode.I))
+        {
+            GameObject bullet = BalaPool.SharedInstance.GetPooledObject();
+            if (bullet != null)
+            {
+                //bullet.transform.position = turret.transform.position;
+                //bullet.transform.rotation = turret.transform.rotation;
+                bullet.SetActive(true);
+            }
+        } */
     }
 
     void FixedUpdate()
@@ -93,9 +107,21 @@ public class Teste2Play : MonoBehaviour
 
     void ShootArrow()
     {
-        GameObject arrow = Instantiate(_arrowPrefab, _arrowSpawnPoint.position, Quaternion.identity);
+        // GameObject arrow = Instantiate(_arrowPrefab, _arrowSpawnPoint.position, Quaternion.identity);
+        GameObject arrow = BalaPool.SharedInstance.GetPooledObject();
+        if (arrow != null)
+        {
+            arrow.transform.position = _arrowSpawnPoint.position;
+            arrow.transform.rotation = Quaternion.identity;
+            arrow.SetActive(true);
+        }
 
-        Vector2 shootDirection = _move == Vector2.zero ? _lastMoveDirection : _move.normalized;
+
+        shootDirection = _move == Vector2.zero ? _lastMoveDirection : _move.normalized;
+        if (shootDirection == Vector2.zero)
+        {
+            shootDirection = new Vector2(0, -1);
+        }
 
         if (Mathf.Abs(shootDirection.x) > Mathf.Abs(shootDirection.y))
         {
@@ -105,6 +131,7 @@ public class Teste2Play : MonoBehaviour
         {
             shootDirection = new Vector2(0, Mathf.Sign(shootDirection.y)); // dispara para cima ou baixo
         }
+
 
         float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
 
