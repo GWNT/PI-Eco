@@ -4,35 +4,45 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 2.0f; // Velocidade do movimento
-    [SerializeField] private float moveDistance = 5.0f; // Distância total que o inimigo percorrerá
+    [SerializeField] Rigidbody2D _rig2d;
 
-    private Vector2 startPosition; // Posição inicial do inimigo
-    private Vector2 targetPosition; // Posição alvo para o movimento
-    private bool movingRight = true; // Direção atual do movimento horizontal
+    [SerializeField] float       _speed; // Velocidade de movimento do inimigo
+
+    public Transform             _direcao; // Referência ao Transform do jogador
+
+    public Transform[]           _pos;
+
 
     void Start()
     {
-        // Armazena a posição inicial
-        startPosition = transform.position;
-        // Define a posição alvo inicial para a direita
-        targetPosition = startPosition + Vector2.right * moveDistance;
+        _rig2d = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        // Move o inimigo em direção à posição alvo
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        // Calcule a direção para o jogador
+        Vector2 direcao = (_direcao.position - transform.position).normalized;
 
-        // Verifica se o inimigo chegou à posição alvo
-        if ((Vector2)transform.position == targetPosition)
-        {
-            // Inverte a direção do movimento horizontal
-            movingRight = !movingRight;
-            // Atualiza a posição alvo
-            targetPosition = movingRight
-                ? startPosition + Vector2.right * moveDistance
-                : startPosition - Vector2.right * moveDistance;
-        }
+
+        // Mova o inimigo
+        _rig2d.MovePosition(_rig2d.position + direcao * _speed * Time.deltaTime);
+
+            
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "pos1")
+        {
+
+        }
+        else if (collision.gameObject.name == "pos2")
+        {
+            Debug.Log("pos2");
+        }
+        
+    }
+
+
+
 }
