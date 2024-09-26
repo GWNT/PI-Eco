@@ -11,16 +11,20 @@ public class MoveInimigo : MonoBehaviour
     public float _displayer;
     public float _distanSeguir;
     public Transform[] _pos;
+    Animator _anim;
+    public bool _andando;
+    [SerializeField] Vector2 direcao;
 
     bool _checkLoop;
     void Start()
     {
         _rig2d = GetComponent<Rigidbody2D>();
         _direcao = _pos[0];
+        _anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         _displayer = Vector2.Distance(transform.position, _player.position);
         if (_displayer <= _distanSeguir)
@@ -34,21 +38,31 @@ public class MoveInimigo : MonoBehaviour
             _direcao = _pos[1];
         }
 
+        direcao = (_direcao.position - transform.position).normalized;
 
+        //teste controle animator
+        _andando = (direcao.x != 0 || direcao.y != 0);
+        if (_andando)
+        {
+            _anim.SetFloat("Horizontal", direcao.x);
+            _anim.SetFloat("Vertical", direcao.y);
+        }
+        _anim.SetBool("Andando", _andando);
+    }
 
-        Vector2 direcao = (_direcao.position - transform.position).normalized;
-
-        _rig2d.MovePosition(_rig2d.position + direcao * _speed * Time.deltaTime);
+    void FixedUpdate()
+    {
+        _rig2d.MovePosition(_rig2d.position + direcao * _speed * Time.fixedDeltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "pos1")
+        if (collision.gameObject.name == "Pos1")
         {
             Debug.Log("Pos1");
             _direcao = _pos[1];
         }
-        else if (collision.gameObject.name == "pos2")
+        else if (collision.gameObject.name == "Pos2")
         {
             Debug.Log("Pos2");
             _direcao = _pos[0];
