@@ -15,6 +15,9 @@ public class MoveInimigo : MonoBehaviour
     public bool _andando;
     [SerializeField] Vector2 direcao;
 
+    // teste hp
+    [SerializeField] int HP = 3;
+
     bool _checkLoop;
     void Start()
     {
@@ -66,6 +69,19 @@ public class MoveInimigo : MonoBehaviour
         {
             Debug.Log("Pos2");
             _direcao = _pos[0];
+        }
+    }
+    // teste hp simples
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Arrow"))
+        {
+            Debug.Log("hit");
+            HP -= 1;
+            if (HP == 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
