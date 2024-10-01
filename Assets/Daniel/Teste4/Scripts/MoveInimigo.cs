@@ -19,8 +19,9 @@ public class MoveInimigo : MonoBehaviour
     [SerializeField] int HP = 3;
     // teste controle waypoint por list
     int listPos = 0;
+    [SerializeField] bool _seguindoPlayer = false; 
 
-    bool _checkLoop = true;
+    [SerializeField] bool _checkLoop = true;
     void Start()
     {
         _rig2d = GetComponent<Rigidbody2D>();
@@ -35,13 +36,15 @@ public class MoveInimigo : MonoBehaviour
         if (_displayer <= _distanSeguir)
         {
             _direcao = _player;
-            _checkLoop = true;
-        }
-        else if (_checkLoop == true)
+            _seguindoPlayer = true;
+        } 
+        else if (_seguindoPlayer == true)
         {
-            _checkLoop = false;
+            _seguindoPlayer = false;
             _direcao = _pos[0];
-        }
+            listPos = 0;
+            //MudaDirecao();
+        } 
 
         direcao = (_direcao.position - transform.position).normalized;
 
@@ -64,11 +67,17 @@ public class MoveInimigo : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Waypoint"))  
         {
-            MudaDirecao();
+            if (!_seguindoPlayer)
+            {
+                MudaDirecao();
+            }
         } 
         else if(collision.gameObject.CompareTag("Enemy"))
         {
-            MudaDirecao();
+            if (!_seguindoPlayer)
+            {
+                MudaDirecao();
+            }
         } 
     }
 
