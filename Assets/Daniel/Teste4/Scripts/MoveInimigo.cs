@@ -20,7 +20,7 @@ public class MoveInimigo : MonoBehaviour
     // teste controle waypoint por list
     int listPos = 0;
 
-    bool _checkLoop;
+    bool _checkLoop = true;
     void Start()
     {
         _rig2d = GetComponent<Rigidbody2D>();
@@ -40,7 +40,7 @@ public class MoveInimigo : MonoBehaviour
         else if (_checkLoop == true)
         {
             _checkLoop = false;
-            _direcao = _pos[1];
+            _direcao = _pos[0];
         }
 
         direcao = (_direcao.position - transform.position).normalized;
@@ -62,55 +62,40 @@ public class MoveInimigo : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        /* if (collision.gameObject.name == "Pos1")
-        {
-            Debug.Log("Pos1");
-            _direcao = _pos[1];
-        }
-        else if (collision.gameObject.name == "Pos2")
-        {
-            Debug.Log("Pos2");
-            _direcao = _pos[0];
-        } */
-
-        // teste controle waypoint
         if (collision.gameObject.CompareTag("Waypoint"))  
         {
             MudaDirecao();
-        } /*
+        } 
         else if(collision.gameObject.CompareTag("Enemy"))
         {
             MudaDirecao();
-        } */
+        } 
     }
+
     void MudaDirecao()
     {
         if (_direcao == _pos[_pos.Length - 1])
-            {
-                listPos = 0;
-                _direcao = _pos[0];
-            }
-            else
-            {
-                listPos += 1;
-                _direcao = _pos[listPos];
-            }
+        {
+            listPos = 0;
+            _direcao = _pos[0];
+        }
+        else
+        {
+            listPos += 1;
+            _direcao = _pos[listPos];
+        }
     }
     // teste hp simples
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Arrow"))
         {
-            Debug.Log("hit");
+            //Debug.Log("hit");
             HP -= 1;
             if (HP == 0)
             {
                 Destroy(gameObject);
             }
-        }
-        else if(collision.gameObject.CompareTag("Enemy"))
-        {
-            MudaDirecao();
-        }
+        } 
     }
 }
