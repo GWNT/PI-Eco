@@ -17,6 +17,8 @@ public class MoveInimigo : MonoBehaviour
 
     // teste hp
     [SerializeField] int HP = 3;
+    // teste controle waypoint por list
+    int listPos = 0;
 
     bool _checkLoop;
     void Start()
@@ -60,7 +62,7 @@ public class MoveInimigo : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Pos1")
+        /* if (collision.gameObject.name == "Pos1")
         {
             Debug.Log("Pos1");
             _direcao = _pos[1];
@@ -69,7 +71,30 @@ public class MoveInimigo : MonoBehaviour
         {
             Debug.Log("Pos2");
             _direcao = _pos[0];
-        }
+        } */
+
+        // teste controle waypoint
+        if (collision.gameObject.CompareTag("Waypoint"))  
+        {
+            MudaDirecao();
+        } /*
+        else if(collision.gameObject.CompareTag("Enemy"))
+        {
+            MudaDirecao();
+        } */
+    }
+    void MudaDirecao()
+    {
+        if (_direcao == _pos[_pos.Length - 1])
+            {
+                listPos = 0;
+                _direcao = _pos[0];
+            }
+            else
+            {
+                listPos += 1;
+                _direcao = _pos[listPos];
+            }
     }
     // teste hp simples
     void OnCollisionEnter2D(Collision2D collision)
@@ -82,6 +107,10 @@ public class MoveInimigo : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+        }
+        else if(collision.gameObject.CompareTag("Enemy"))
+        {
+            MudaDirecao();
         }
     }
 }
