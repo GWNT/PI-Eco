@@ -62,3 +62,6 @@ TagManager:
   - name: Decor
     uniqueID: 457692205
     locked: 0
+  - name: HUD
+    uniqueID: 4088933937
+    locked: 0

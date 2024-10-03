@@ -21,7 +21,7 @@ public class MoveInimigo : MonoBehaviour
     int listPos = 0;
     [SerializeField] bool _seguindoPlayer = false; 
 
-    [SerializeField] bool _checkLoop = true;
+    //[SerializeField] bool _checkLoop = true;
     void Start()
     {
         _rig2d = GetComponent<Rigidbody2D>();

@@ -17,6 +17,8 @@ public class Teste2Play : MonoBehaviour
     private Vector2 _storedMove; // armazena a entrada de movimento enquanto o movimento está bloqueado
     public float _attackAnimationDuration = 0.4f; // Tempo fixo para duração da animação de ataque
     public float knockbackForce = 10f;  // Ajuste a força do impulso como preferir
+    public bool contato = false; // verifica se o player colide com enemies
+    public Collision2D colisao; // teste 
 
     // Life
     public LifeControl LifeScript;
@@ -51,6 +53,13 @@ public class Teste2Play : MonoBehaviour
             }
             _anim.SetBool("Andando", _andando);
         }
+
+        if (contato)
+        {
+            Knockback(colisao);
+        }
+        
+
     }
 
     void FixedUpdate()
@@ -174,7 +183,7 @@ public class Teste2Play : MonoBehaviour
         //Debug.Log("Movimento liberado");
         _anim.SetBool("Atacando", false);
     }
-    
+    /*
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
@@ -191,24 +200,43 @@ public class Teste2Play : MonoBehaviour
             //_rb.velocity = knockbackDirection * knockbackForce;
             _rb.MovePosition(_rb.position + knockbackDirection * knockbackForce);
         }
-    } 
-    /*
+    } */
+    
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
             LifeScript.PerderVida();
             Debug.Log("Tomou dano");
+            knockbackForce = 10f;
+            contato = true;
 
-            // Pega o ponto de contato da colisão
-            Vector2 contactPoint = collision.contacts[0].point;
-            Vector2 playerPosition = transform.position;
-
-            // Calcula a direção oposta ao ponto de contato
-            Vector2 knockbackDirection = (playerPosition - contactPoint).normalized;
-
-            // Aplica uma força na direção oposta à colisão
-            _rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
+            colisao = collision;
         }
-    } */
+    } 
+
+    void Knockback(Collision2D collision)
+    {
+        // Pega o ponto de contato da colisão
+        Vector2 contactPoint = collision.contacts[0].point;
+        Vector2 playerPosition = transform.position;
+
+        // Calcula a direção oposta ao ponto de contato
+        Vector2 knockbackDirection = (playerPosition - contactPoint).normalized;
+
+        Debug.Log(knockbackDirection * knockbackForce);
+
+        // Aplica uma força na direção oposta à colisão
+        //_rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
+        _rb.velocity = knockbackDirection * knockbackForce;
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            knockbackForce = 0f;
+        }
+        contato = false;
+    }
 }
