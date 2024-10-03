@@ -16,6 +16,10 @@ public class Teste2Play : MonoBehaviour
     private bool _canMove = true; // controla se o player pode se mover
     private Vector2 _storedMove; // armazena a entrada de movimento enquanto o movimento está bloqueado
     public float _attackAnimationDuration = 0.4f; // Tempo fixo para duração da animação de ataque
+    public float knockbackForce = 10f;  // Ajuste a força do impulso como preferir
+
+    // Life
+    public LifeControl LifeScript;
 
     // Variáveis da flecha
     public GameObject _arrowPrefab; // Prefab da flecha
@@ -47,18 +51,6 @@ public class Teste2Play : MonoBehaviour
             }
             _anim.SetBool("Andando", _andando);
         }
-
-        // teste novo instanciamento de prefab
-        /* if (Input.GetKeyDown(KeyCode.I))
-        {
-            GameObject bullet = BalaPool.SharedInstance.GetPooledObject();
-            if (bullet != null)
-            {
-                //bullet.transform.position = turret.transform.position;
-                //bullet.transform.rotation = turret.transform.rotation;
-                bullet.SetActive(true);
-            }
-        } */
     }
 
     void FixedUpdate()
@@ -182,4 +174,41 @@ public class Teste2Play : MonoBehaviour
         //Debug.Log("Movimento liberado");
         _anim.SetBool("Atacando", false);
     }
+    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            LifeScript.PerderVida();
+            Debug.Log("Tomou dano");
+
+            // Calcula a direção oposta à do inimigo
+            Vector2 knockbackDirection = (transform.position - collision.transform.position).normalized;
+
+            Debug.Log(knockbackDirection * knockbackForce);
+
+            // Aplica uma força na direção oposta
+            //_rb.velocity = knockbackDirection * knockbackForce;
+            _rb.MovePosition(_rb.position + knockbackDirection * knockbackForce);
+        }
+    } 
+    /*
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            LifeScript.PerderVida();
+            Debug.Log("Tomou dano");
+
+            // Pega o ponto de contato da colisão
+            Vector2 contactPoint = collision.contacts[0].point;
+            Vector2 playerPosition = transform.position;
+
+            // Calcula a direção oposta ao ponto de contato
+            Vector2 knockbackDirection = (playerPosition - contactPoint).normalized;
+
+            // Aplica uma força na direção oposta à colisão
+            _rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
+        }
+    } */
 }
