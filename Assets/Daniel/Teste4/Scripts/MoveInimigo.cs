@@ -7,7 +7,7 @@ public class MoveInimigo : MonoBehaviour
     Rigidbody2D _rig2d;
     [SerializeField] float _speed;
     public Transform _direcao;
-    public Transform _player;
+    public GameObject _player;  // alterado de Transform
     public float _displayer;
     public float _distanSeguir;
     public Transform[] _pos;
@@ -17,11 +17,13 @@ public class MoveInimigo : MonoBehaviour
 
     // teste hp
     [SerializeField] int HP = 3;
-    // teste controle waypoint por list
-    int listPos = 0;
+    // controle waypoint por list
+    [SerializeField] int listPos = 0;
     [SerializeField] bool _seguindoPlayer = false; 
 
-    //[SerializeField] bool _checkLoop = true;
+    // teste -> parar de seguir player se o player morrer
+    [SerializeField] bool PlayerAlive = true;
+
     void Start()
     {
         _rig2d = GetComponent<Rigidbody2D>();
@@ -29,13 +31,18 @@ public class MoveInimigo : MonoBehaviour
         _anim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        _displayer = Vector2.Distance(transform.position, _player.position);
-        if (_displayer <= _distanSeguir)
+        
+        if (!_player.gameObject.activeSelf)
         {
-            _direcao = _player;
+            PlayerAlive = false;
+        }  
+        
+        _displayer = Vector2.Distance(transform.position, _player.transform.position);
+        if (_displayer <= _distanSeguir && PlayerAlive)
+        {
+            _direcao = _player.transform;
             _seguindoPlayer = true;
         } 
         else if (_seguindoPlayer == true)
@@ -43,12 +50,12 @@ public class MoveInimigo : MonoBehaviour
             _seguindoPlayer = false;
             _direcao = _pos[0];
             listPos = 0;
-            //MudaDirecao();
+            Debug.Log("Parando de seguir o player - " + gameObject.name);
         } 
 
         direcao = (_direcao.position - transform.position).normalized;
 
-        //teste controle animator
+        // controle animator
         _andando = (direcao.x != 0 || direcao.y != 0);
         if (_andando)
         {
@@ -67,39 +74,36 @@ public class MoveInimigo : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Waypoint"))  
         {
-            if (!_seguindoPlayer)
-            {
-                MudaDirecao();
-            }
+            MudaDirecao();
         } 
         else if(collision.gameObject.CompareTag("Enemy"))
         {
-            if (!_seguindoPlayer)
-            {
-                MudaDirecao();
-            }
+            MudaDirecao();
         } 
     }
 
     void MudaDirecao()
     {
-        if (_direcao == _pos[_pos.Length - 1])
+        if (!_seguindoPlayer)
         {
-            listPos = 0;
-            _direcao = _pos[0];
-        }
-        else
-        {
-            listPos += 1;
-            _direcao = _pos[listPos];
+            if (_direcao == _pos[_pos.Length - 1])
+            {
+                listPos = 0;
+                _direcao = _pos[0];
+            }
+            else
+            {
+                listPos += 1;
+                _direcao = _pos[listPos];
+            }
         }
     }
-    // teste hp simples
+    
+    // controle de hp simples
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Arrow"))
         {
-            //Debug.Log("hit");
             HP -= 1;
             if (HP == 0)
             {

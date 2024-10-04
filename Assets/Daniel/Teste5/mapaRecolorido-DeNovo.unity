@@ -5718,7 +5718,7 @@ Animator:
   m_GameObject: {fileID: 110903135}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4779d7ddd783a0a42b439131d2605f0e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5d5f4750d4082354496649c73b145288, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5743,7 +5743,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 3
   _direcao: {fileID: 0}
-  _player: {fileID: 1125504400}
+  _player: {fileID: 1125504393}
   _displayer: 0
   _distanSeguir: 7
   _pos:
@@ -5753,8 +5753,9 @@ MonoBehaviour:
   _andando: 0
   direcao: {x: 0, y: 0}
   HP: 3
+  listPos: 0
   _seguindoPlayer: 0
-  _checkLoop: 1
+  PlayerAlive: 1
 --- !u!50 &110903138
 Rigidbody2D:
   serializedVersion: 4
@@ -5814,7 +5815,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.51}
+  m_Offset: {x: 0, y: 0.33}
   m_Size: {x: 0.79, y: 0.63}
   m_Direction: 0
 --- !u!212 &110903140
@@ -5858,7 +5859,7 @@ SpriteRenderer:
   m_SortingLayerID: -11167403
   m_SortingLayer: 4
   m_SortingOrder: 3
-  m_Sprite: {fileID: -2118759278, guid: 06a287cc97cb64df8a11af10f2352365, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1ef0b11c58b12a240b410858565d647d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5916,7 +5917,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.51}
+  m_Offset: {x: 0, y: 0.36}
   serializedVersion: 2
   m_Radius: 0.7
 --- !u!1 &169697137
@@ -14852,7 +14853,7 @@ Animator:
   m_GameObject: {fileID: 239336298}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4779d7ddd783a0a42b439131d2605f0e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5d5f4750d4082354496649c73b145288, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -14877,7 +14878,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 2
   _direcao: {fileID: 0}
-  _player: {fileID: 1125504400}
+  _player: {fileID: 1125504393}
   _displayer: 0
   _distanSeguir: 15
   _pos:
@@ -14886,8 +14887,9 @@ MonoBehaviour:
   _andando: 0
   direcao: {x: 0, y: 0}
   HP: 10
+  listPos: 0
   _seguindoPlayer: 0
-  _checkLoop: 1
+  PlayerAlive: 1
 --- !u!50 &239336301
 Rigidbody2D:
   serializedVersion: 4
@@ -14947,7 +14949,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.51}
+  m_Offset: {x: 0, y: 0.33}
   m_Size: {x: 0.79, y: 0.63}
   m_Direction: 0
 --- !u!212 &239336303
@@ -14991,7 +14993,7 @@ SpriteRenderer:
   m_SortingLayerID: -11167403
   m_SortingLayer: 4
   m_SortingOrder: 3
-  m_Sprite: {fileID: -2118759278, guid: 06a287cc97cb64df8a11af10f2352365, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1ef0b11c58b12a240b410858565d647d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -15049,7 +15051,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.51}
+  m_Offset: {x: 0, y: 0.36}
   serializedVersion: 2
   m_Radius: 0.7
 --- !u!1 &287468880
@@ -15084,7 +15086,7 @@ Animator:
   m_GameObject: {fileID: 287468880}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4779d7ddd783a0a42b439131d2605f0e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5d5f4750d4082354496649c73b145288, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -15109,7 +15111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 3
   _direcao: {fileID: 0}
-  _player: {fileID: 1125504400}
+  _player: {fileID: 1125504393}
   _displayer: 0
   _distanSeguir: 7
   _pos:
@@ -15118,8 +15120,9 @@ MonoBehaviour:
   _andando: 0
   direcao: {x: 0, y: 0}
   HP: 3
+  listPos: 0
   _seguindoPlayer: 0
-  _checkLoop: 1
+  PlayerAlive: 1
 --- !u!50 &287468883
 Rigidbody2D:
   serializedVersion: 4
@@ -15179,7 +15182,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.51}
+  m_Offset: {x: 0, y: 0.33}
   m_Size: {x: 0.79, y: 0.63}
   m_Direction: 0
 --- !u!212 &287468885
@@ -15223,7 +15226,7 @@ SpriteRenderer:
   m_SortingLayerID: -11167403
   m_SortingLayer: 4
   m_SortingOrder: 3
-  m_Sprite: {fileID: -2118759278, guid: 06a287cc97cb64df8a11af10f2352365, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1ef0b11c58b12a240b410858565d647d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -15281,7 +15284,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.51}
+  m_Offset: {x: 0, y: 0.36}
   serializedVersion: 2
   m_Radius: 0.7
 --- !u!1 &402038634
@@ -15923,7 +15926,7 @@ Animator:
   m_GameObject: {fileID: 961170353}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4779d7ddd783a0a42b439131d2605f0e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5d5f4750d4082354496649c73b145288, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -15948,7 +15951,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 3
   _direcao: {fileID: 0}
-  _player: {fileID: 1125504400}
+  _player: {fileID: 1125504393}
   _displayer: 0
   _distanSeguir: 7
   _pos:
@@ -15958,8 +15961,9 @@ MonoBehaviour:
   _andando: 0
   direcao: {x: 0, y: 0}
   HP: 3
+  listPos: 0
   _seguindoPlayer: 0
-  _checkLoop: 1
+  PlayerAlive: 1
 --- !u!50 &961170356
 Rigidbody2D:
   serializedVersion: 4
@@ -16019,7 +16023,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.51}
+  m_Offset: {x: 0, y: 0.33}
   m_Size: {x: 0.79, y: 0.63}
   m_Direction: 0
 --- !u!212 &961170358
@@ -16063,7 +16067,7 @@ SpriteRenderer:
   m_SortingLayerID: -11167403
   m_SortingLayer: 4
   m_SortingOrder: 3
-  m_Sprite: {fileID: -2118759278, guid: 06a287cc97cb64df8a11af10f2352365, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1ef0b11c58b12a240b410858565d647d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -16121,7 +16125,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.51}
+  m_Offset: {x: 0, y: 0.36}
   serializedVersion: 2
   m_Radius: 0.7
 --- !u!1 &1008077286
@@ -34587,7 +34591,7 @@ Transform:
   m_GameObject: {fileID: 1066222713}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.12, z: -10}
+  m_LocalPosition: {x: 0, y: 2.03, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -34613,6 +34617,7 @@ MonoBehaviour:
   - {fileID: 1816958281}
   - {fileID: 402038635}
   - {fileID: 1765633271}
+  Player: {fileID: 1125504393}
 --- !u!1 &1069801465
 GameObject:
   m_ObjectHideFlags: 0
@@ -34885,7 +34890,8 @@ MonoBehaviour:
   _lastMoveDirection: {x: 0, y: 0}
   _andando: 0
   _attackAnimationDuration: 0.4
-  knockbackForce: 10000
+  knockbackForce: 10
+  contato: 0
   LifeScript: {fileID: 1066222719}
   _arrowPrefab: {fileID: 6848365317458882778, guid: b82cdd81b7602d34899e405a836bc72e, type: 3}
   _arrowSpawnPoint: {fileID: 1008077287}
@@ -35001,7 +35007,7 @@ Transform:
   m_GameObject: {fileID: 1125504393}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.12, z: 0}
+  m_LocalPosition: {x: 0, y: 2.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -35277,7 +35283,7 @@ Animator:
   m_GameObject: {fileID: 1428769524}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4779d7ddd783a0a42b439131d2605f0e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5d5f4750d4082354496649c73b145288, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -35302,7 +35308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 3
   _direcao: {fileID: 0}
-  _player: {fileID: 1125504400}
+  _player: {fileID: 1125504393}
   _displayer: 0
   _distanSeguir: 7
   _pos:
@@ -35312,8 +35318,9 @@ MonoBehaviour:
   _andando: 0
   direcao: {x: 0, y: 0}
   HP: 3
+  listPos: 0
   _seguindoPlayer: 0
-  _checkLoop: 1
+  PlayerAlive: 1
 --- !u!50 &1428769527
 Rigidbody2D:
   serializedVersion: 4
@@ -35373,7 +35380,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.51}
+  m_Offset: {x: 0, y: 0.33}
   m_Size: {x: 0.79, y: 0.63}
   m_Direction: 0
 --- !u!212 &1428769529
@@ -35417,7 +35424,7 @@ SpriteRenderer:
   m_SortingLayerID: -11167403
   m_SortingLayer: 4
   m_SortingOrder: 3
-  m_Sprite: {fileID: -2118759278, guid: 06a287cc97cb64df8a11af10f2352365, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1ef0b11c58b12a240b410858565d647d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -35475,7 +35482,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.51}
+  m_Offset: {x: 0, y: 0.36}
   serializedVersion: 2
   m_Radius: 0.7
 --- !u!1 &1505902474
@@ -35510,7 +35517,7 @@ Animator:
   m_GameObject: {fileID: 1505902474}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4779d7ddd783a0a42b439131d2605f0e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5d5f4750d4082354496649c73b145288, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -35535,7 +35542,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 3
   _direcao: {fileID: 0}
-  _player: {fileID: 1125504400}
+  _player: {fileID: 1125504393}
   _displayer: 0
   _distanSeguir: 7
   _pos:
@@ -35544,8 +35551,9 @@ MonoBehaviour:
   _andando: 0
   direcao: {x: 0, y: 0}
   HP: 3
+  listPos: 0
   _seguindoPlayer: 0
-  _checkLoop: 1
+  PlayerAlive: 1
 --- !u!50 &1505902477
 Rigidbody2D:
   serializedVersion: 4
@@ -35605,7 +35613,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.51}
+  m_Offset: {x: 0, y: 0.33}
   m_Size: {x: 0.79, y: 0.63}
   m_Direction: 0
 --- !u!212 &1505902479
@@ -35649,7 +35657,7 @@ SpriteRenderer:
   m_SortingLayerID: -11167403
   m_SortingLayer: 4
   m_SortingOrder: 3
-  m_Sprite: {fileID: -2118759278, guid: 06a287cc97cb64df8a11af10f2352365, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1ef0b11c58b12a240b410858565d647d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -35707,7 +35715,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.51}
+  m_Offset: {x: 0, y: 0.36}
   serializedVersion: 2
   m_Radius: 0.7
 --- !u!1 &1541162303
@@ -44940,7 +44948,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 3
   _direcao: {fileID: 0}
-  _player: {fileID: 1125504400}
+  _player: {fileID: 1125504393}
   _displayer: 0
   _distanSeguir: 7
   _pos:
@@ -44949,8 +44957,9 @@ MonoBehaviour:
   _andando: 0
   direcao: {x: 0, y: 0}
   HP: 3
+  listPos: 0
   _seguindoPlayer: 0
-  _checkLoop: 1
+  PlayerAlive: 1
 --- !u!50 &1699612053
 Rigidbody2D:
   serializedVersion: 4
@@ -45010,7 +45019,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.51}
+  m_Offset: {x: 0, y: 0.33}
   m_Size: {x: 0.79, y: 0.63}
   m_Direction: 0
 --- !u!212 &1699612055
@@ -45054,7 +45063,7 @@ SpriteRenderer:
   m_SortingLayerID: -11167403
   m_SortingLayer: 4
   m_SortingOrder: 3
-  m_Sprite: {fileID: -2118759278, guid: 06a287cc97cb64df8a11af10f2352365, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1ef0b11c58b12a240b410858565d647d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -45090,7 +45099,7 @@ Animator:
   m_GameObject: {fileID: 1699612051}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4779d7ddd783a0a42b439131d2605f0e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5d5f4750d4082354496649c73b145288, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -45133,7 +45142,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.51}
+  m_Offset: {x: 0, y: 0.36}
   serializedVersion: 2
   m_Radius: 0.7
 --- !u!1 &1733304722
@@ -45805,7 +45814,7 @@ Transform:
   m_GameObject: {fileID: 2006175317}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.12, z: -10}
+  m_LocalPosition: {x: 0, y: 2.03, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
