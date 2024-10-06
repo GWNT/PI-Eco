@@ -24,6 +24,9 @@ public class MoveInimigo : MonoBehaviour
     // teste -> parar de seguir player se o player morrer
     [SerializeField] bool PlayerAlive = true;
 
+    // teste: drop de hp
+    public GameObject lifePrefab;  // Prefab da vida a ser dropada
+
     void Start()
     {
         _rig2d = GetComponent<Rigidbody2D>();
@@ -50,7 +53,7 @@ public class MoveInimigo : MonoBehaviour
             _seguindoPlayer = false;
             _direcao = _pos[0];
             listPos = 0;
-            Debug.Log("Parando de seguir o player - " + gameObject.name);
+            //Debug.Log("Parando de seguir o player - " + gameObject.name);
         } 
 
         direcao = (_direcao.position - transform.position).normalized;
@@ -108,6 +111,8 @@ public class MoveInimigo : MonoBehaviour
             if (HP == 0)
             {
                 Destroy(gameObject);
+                // Dropar o item de vida na posição do inimigo
+                Instantiate(lifePrefab, transform.position, Quaternion.identity);
             }
         } 
     }

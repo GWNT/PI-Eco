@@ -19,6 +19,10 @@ public class Teste2Play : MonoBehaviour
     public float knockbackForce = 10f;  // Ajuste a força do impulso como preferir
     public bool contato = false; // verifica se o player colide com enemies
     public Collision2D colisao; // teste 
+    public bool isInvulnerable = false;
+    public float invulnerableDuration = 0.5f;
+    public int numberOfFlashes = 4; // Número de piscadas
+    private SpriteRenderer spriteRenderer;
 
     // Life
     public LifeControl LifeScript;
@@ -34,6 +38,7 @@ public class Teste2Play : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         Debug.Log("Special thanks to ChatGPT ;)");
         Debug.Log("Botão esquerdo do mouse para disparar flechas.");
     }
@@ -181,6 +186,12 @@ public class Teste2Play : MonoBehaviour
     /*
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.CompareTag("Life"))
+        {
+            Debug.Log("Colidiu com a vida");
+            LifeScript.GanharVida();
+        }
+        /* 
         if (collision.gameObject.CompareTag("Enemy"))
         {
             LifeScript.PerderVida();
@@ -194,22 +205,22 @@ public class Teste2Play : MonoBehaviour
             // Aplica uma força na direção oposta
             //_rb.velocity = knockbackDirection * knockbackForce;
             _rb.MovePosition(_rb.position + knockbackDirection * knockbackForce);
-        }
+        } 
     } */
     
     void OnCollisionEnter2D(Collision2D collision)
     {
+        //Debug.Log("Colidiu com " + collision.gameObject.tag);
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            LifeScript.PerderVida();  // Aplica dano imediatamente
-            Debug.Log("Tomou dano");
+            if (!isInvulnerable)
+            {
+                LifeScript.PerderVida();  // Aplica dano imediatamente
+            }
 
             // Pega as posições do player e do inimigo
             Vector2 playerPosition = transform.position;
             Vector2 enemyPosition = collision.transform.position;
-
-            Debug.Log("Posição do Player: " + playerPosition);
-            Debug.Log("Posição do Inimigo: " + enemyPosition);
 
             // Calcula a direção oposta à do inimigo
             Vector2 knockbackDirection = (playerPosition - enemyPosition).normalized;
@@ -220,14 +231,12 @@ public class Teste2Play : MonoBehaviour
                 knockbackDirection = Vector2.up; // Define uma direção padrão
             }
 
-            Debug.Log("Direção de Knockback: " + knockbackDirection);
-            Debug.Log("Força de Knockback: " + knockbackDirection * knockbackForce);
-
             // Aplica a força de knockback imediatamente
             _rb.velocity = knockbackDirection * knockbackForce;
 
             // Bloqueia temporariamente o movimento após o knockback
             StartCoroutine(TemporaryBlockMovement());
+            StartCoroutine(BecomeTemporarilyInvulnerable());
         }
     }
 
@@ -235,10 +244,30 @@ public class Teste2Play : MonoBehaviour
     {
         _canMove = false;  // Impede o movimento temporariamente
 
-        yield return new WaitForSeconds(0.2f);  // Ajuste o tempo conforme necessário
+        yield return new WaitForSeconds(0.1f);  // Ajuste o tempo conforme necessário
 
         _canMove = true;   // Libera o movimento novamente
         _rb.velocity = Vector2.zero;  // Reseta a velocidade para evitar movimento indesejado
+    }
+
+    private IEnumerator BecomeTemporarilyInvulnerable()
+    {
+        isInvulnerable = true;
+        //Debug.Log("Invulnerável ativado");
+
+        for (int i = 0; i < numberOfFlashes; i++)
+        {
+            // Deixa o player parcialmente transparente (50%)
+            spriteRenderer.color = new Color(1, 1, 1, 0.5f);
+            yield return new WaitForSeconds(invulnerableDuration / (numberOfFlashes * 2));
+
+            // Volta o player para opaco
+            spriteRenderer.color = new Color(1, 1, 1, 1);
+            yield return new WaitForSeconds(invulnerableDuration / (numberOfFlashes * 2));
+        }
+        
+        isInvulnerable = false;
+        //Debug.Log("Invulnerável desativado");
     }
 
     /*

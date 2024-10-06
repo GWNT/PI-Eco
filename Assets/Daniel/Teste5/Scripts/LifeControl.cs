@@ -10,10 +10,7 @@ public class LifeControl : MonoBehaviour
 
     void Start()
     {
-        _quantLifes = 4;
-        Lifes[0].transform.localScale = Vector3.one;
-        Lifes[1].transform.localScale = Vector3.one;
-        Lifes[2].transform.localScale = Vector3.one;   
+        _quantLifes = 4; 
     }
 
     void Update()
@@ -23,7 +20,11 @@ public class LifeControl : MonoBehaviour
 
     public void GanharVida()
     {
-        // nada por enquanto :)
+        if (_quantLifes < 4)
+        {
+            _quantLifes++;
+            Lifes[_quantLifes].transform.localScale = Vector3.one;
+        }
     }
 
     public void PerderVida()
@@ -41,7 +42,7 @@ public class LifeControl : MonoBehaviour
         {
             Debug.Log("Player morreu!");
             Player.SetActive(false);
-            _quantLifes--; // só pra não ficar spamando Player morreu no console
+            _quantLifes--; // só pra não ficar spamando "Player morreu!" no console
         }
     }
 }
