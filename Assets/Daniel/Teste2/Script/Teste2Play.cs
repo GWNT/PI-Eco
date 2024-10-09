@@ -17,14 +17,12 @@ public class Teste2Play : MonoBehaviour
     private Vector2 _storedMove; // armazena a entrada de movimento enquanto o movimento está bloqueado
     public float _attackAnimationDuration = 0.4f; // Tempo fixo para duração da animação de ataque
     public float knockbackForce = 10f;  // Ajuste a força do impulso como preferir
-    public bool contato = false; // verifica se o player colide com enemies
-    public Collision2D colisao; // teste 
     public bool isInvulnerable = false;
     public float invulnerableDuration = 0.5f;
     public int numberOfFlashes = 4; // Número de piscadas
     private SpriteRenderer spriteRenderer;
 
-    // Life
+    // Life na HUD
     public LifeControl LifeScript;
 
     // Variáveis da flecha
@@ -40,12 +38,11 @@ public class Teste2Play : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         Debug.Log("Special thanks to ChatGPT ;)");
-        Debug.Log("Botão esquerdo do mouse para disparar flechas.");
+        Debug.Log("Botão esquerdo do mouse ou espaço no teclado para disparar flechas.");
     }
 
     void Update()
     {
-        // Se puder se mover, atualiza as animações de movimento
         if (_canMove)
         {
             _andando = (_move.x != 0 || _move.y != 0);
@@ -60,13 +57,14 @@ public class Teste2Play : MonoBehaviour
         }
 
         LifeScript.CheckMorte();
+        // se quiser deixar o player imortal para testes, descomentar a linha abaixo
+        // LifeScript.GanharVida();  // deixando player regenerar vida continuamente para fazer testes de colisão com inimigos
     }
 
     void FixedUpdate()
     {
         if (_canMove)
         {
-            // Move o player se ele puder se mover
             _rb.MovePosition(_rb.position + _move.normalized * _speed * Time.fixedDeltaTime);
         }
     }
@@ -97,7 +95,6 @@ public class Teste2Play : MonoBehaviour
     {
         if (value.performed && _canShoot && !IsAnimationPlaying("Attack"))
         {
-            _anim.SetTrigger("Attack");
             _anim.SetBool("Atacando", true); // define Atacando como true
             _move = Vector2.zero; // força o movimento a zero ao iniciar o ataque
             ShootArrow();
@@ -108,7 +105,6 @@ public class Teste2Play : MonoBehaviour
 
     void ShootArrow()
     {
-        // GameObject arrow = Instantiate(_arrowPrefab, _arrowSpawnPoint.position, Quaternion.identity);
         GameObject arrow = BalaPool.SharedInstance.GetPooledObject();
         if (arrow != null)
         {
@@ -119,6 +115,7 @@ public class Teste2Play : MonoBehaviour
 
 
         shootDirection = _move == Vector2.zero ? _lastMoveDirection : _move.normalized;
+
         if (shootDirection == Vector2.zero)
         {
             shootDirection = new Vector2(0, -1);
@@ -174,40 +171,14 @@ public class Teste2Play : MonoBehaviour
     private IEnumerator DisableMovementDuringAttack()
     {
         _canMove = false;
-        //Debug.Log("Movimento bloqueado");
 
         yield return new WaitForSeconds(_attackAnimationDuration);
 
         _canMove = true;
         _move = _storedMove; // restaura o movimento armazenado
-        //Debug.Log("Movimento liberado");
         _anim.SetBool("Atacando", false);
     }
-    /*
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Life"))
-        {
-            Debug.Log("Colidiu com a vida");
-            LifeScript.GanharVida();
-        }
-        /* 
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            LifeScript.PerderVida();
-            Debug.Log("Tomou dano");
 
-            // Calcula a direção oposta à do inimigo
-            Vector2 knockbackDirection = (transform.position - collision.transform.position).normalized;
-
-            Debug.Log(knockbackDirection * knockbackForce);
-
-            // Aplica uma força na direção oposta
-            //_rb.velocity = knockbackDirection * knockbackForce;
-            _rb.MovePosition(_rb.position + knockbackDirection * knockbackForce);
-        } 
-    } */
-    
     void OnCollisionEnter2D(Collision2D collision)
     {
         //Debug.Log("Colidiu com " + collision.gameObject.tag);
@@ -215,7 +186,7 @@ public class Teste2Play : MonoBehaviour
         {
             if (!isInvulnerable)
             {
-                LifeScript.PerderVida();  // Aplica dano imediatamente
+                LifeScript.PerderVida(); 
             }
 
             // Pega as posições do player e do inimigo
@@ -235,7 +206,8 @@ public class Teste2Play : MonoBehaviour
             _rb.velocity = knockbackDirection * knockbackForce;
 
             // Bloqueia temporariamente o movimento após o knockback
-            StartCoroutine(TemporaryBlockMovement());
+            StartCoroutine(TemporaryBlockMovement());  // aparentemente precisa disso para knockback funcionar corretamente
+            // Deixa o player temporariamente invulnerável
             StartCoroutine(BecomeTemporarilyInvulnerable());
         }
     }
@@ -248,13 +220,14 @@ public class Teste2Play : MonoBehaviour
 
         _canMove = true;   // Libera o movimento novamente
         _rb.velocity = Vector2.zero;  // Reseta a velocidade para evitar movimento indesejado
+        _move = _storedMove;  // restaura o movimento armazenado
     }
 
     private IEnumerator BecomeTemporarilyInvulnerable()
     {
         isInvulnerable = true;
-        //Debug.Log("Invulnerável ativado");
 
+        // Faz o player ficar piscando
         for (int i = 0; i < numberOfFlashes; i++)
         {
             // Deixa o player parcialmente transparente (50%)
@@ -267,32 +240,5 @@ public class Teste2Play : MonoBehaviour
         }
         
         isInvulnerable = false;
-        //Debug.Log("Invulnerável desativado");
     }
-
-    /*
-    void Knockback(Collision2D collision)
-    {
-        // Pega o ponto de contato da colisão
-        Vector2 contactPoint = collision.contacts[0].point;
-        Vector2 playerPosition = transform.position;
-
-        // Calcula a direção oposta ao ponto de contato
-        Vector2 knockbackDirection = (playerPosition - contactPoint).normalized;
-
-        Debug.Log(knockbackDirection * knockbackForce);
-
-        // Aplica uma força na direção oposta à colisão
-        //_rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
-        _rb.velocity = knockbackDirection * knockbackForce;
-    } 
-
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            knockbackForce = 0f;
-        }
-        contato = false;
-    } */
 }
