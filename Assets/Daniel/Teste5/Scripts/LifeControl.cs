@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,10 +8,12 @@ public class LifeControl : MonoBehaviour
     [SerializeField] int _quantLifes;
     [SerializeField] Transform[] Lifes;
     [SerializeField] GameObject Player;
+    [SerializeField] Transform lifeTemp;
 
     void Start()
     {
-        _quantLifes = 4; 
+        _quantLifes = 4;
+        lifeTemp.gameObject.SetActive(false);
     }
 
     void Update()
@@ -18,13 +21,29 @@ public class LifeControl : MonoBehaviour
         
     }
 
-    public void GanharVida()
+    public void GanharVida(Transform value)
     {
         if (_quantLifes < 4)
         {
+           
             _quantLifes++;
-            Lifes[_quantLifes].transform.localScale = Vector3.one;
+            lifeTemp.position = value.position;
+            lifeTemp.transform.parent = Lifes[_quantLifes].parent;
+            lifeTemp.gameObject.SetActive(true);
+            // lifeTemp.localPosition = value.localPosition;
+
+
+          
+            lifeTemp.DOLocalMove(Vector3.zero, 1);
+            Invoke("TimeOff", 1);
+            //value.DOLocalMove(Lifes[_quantLifes].transform.position, 1);
         }
+    }
+
+    void TimeOff()
+    {
+        lifeTemp.gameObject.SetActive(false);
+        Lifes[_quantLifes].transform.localScale = Vector3.one;
     }
 
     public void PerderVida()
