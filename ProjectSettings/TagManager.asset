@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - MapCollision
   - Life
+  - ArrowCollision
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - Player
   - Water
   - UI
-  - 
+  - Obstacle
   - 
   - 
   - 

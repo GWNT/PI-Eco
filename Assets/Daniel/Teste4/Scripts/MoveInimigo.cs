@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MoveInimigo : MonoBehaviour
 {
@@ -31,12 +32,18 @@ public class MoveInimigo : MonoBehaviour
     [SerializeField] float viewRadius = 5f;  // Alcance da visão
     [SerializeField] float viewAngle = 90f;  // Ângulo da visão
     public Transform visionOrigin; // O GameObject filho
+    
+    NavMeshAgent agent;  // teste: seguir player desviando automaticamente dos obstáculos
 
     void Start()
     {
         _rig2d = GetComponent<Rigidbody2D>();
         _direcao = _pos[0];
         _anim = GetComponent<Animator>();
+        /*
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false; */
     }
 
     void Update()
@@ -53,6 +60,7 @@ public class MoveInimigo : MonoBehaviour
             if (_displayer <= _distanSeguir)
             {
                 _direcao = _player.transform;
+                //agent.SetDestination(_direcao.position);
                 _seguindoPlayer = true;
             }
         }
@@ -60,10 +68,15 @@ public class MoveInimigo : MonoBehaviour
         {
             _seguindoPlayer = false;
             _direcao = _pos[0];
+            //agent.SetDestination(_pos[0].position);
             listPos = 0;
         }
 
-        direcao = (_direcao.position - transform.position).normalized;
+        // Se não houver obstáculo, mover na direção normal
+        if (_direcao != null)
+        {
+            direcao = (_direcao.position - transform.position).normalized;
+        }
 
         // Controle de animação
         _andando = (direcao.x != 0 || direcao.y != 0);
@@ -78,6 +91,8 @@ public class MoveInimigo : MonoBehaviour
     void FixedUpdate()
     {
         _rig2d.MovePosition(_rig2d.position + direcao * _speed * Time.fixedDeltaTime);
+
+        //agent.SetDestination(direcao);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -134,19 +149,17 @@ public class MoveInimigo : MonoBehaviour
         if (Vector2.Angle(direcao, directionToPlayer) < viewAngle / 2)
         {
             // Usa uma camada específica para garantir que só o player seja detectado
-            LayerMask mask = LayerMask.GetMask("Player");  // Substitua "Player" pelo nome da camada correta
+            LayerMask mask = LayerMask.GetMask("Player");  
 
             RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToPlayer, viewRadius, mask);
             if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
-                Debug.Log("Player detectado!");
-                return true; // Player está visível
+                //Debug.Log("Player detectado!");
+                return true; 
             }
         }
         return false; // Player está fora do campo de visão
     }
-
-
 
     void OnDrawGizmos()
     {
@@ -157,7 +170,7 @@ public class MoveInimigo : MonoBehaviour
         DrawCircle(visionOrigin.position, viewRadius);
 
         // Define a cor do cone de visão
-        Gizmos.color = Color.red; // Altere para a cor desejada
+        Gizmos.color = Color.red; 
 
         // Calcula a direção dos limites do campo de visão com base na direção do inimigo
         Vector2 rightBoundary = DirFromAngle(-viewAngle / 2, false);  // false para usar a direção local (não global)
@@ -193,6 +206,4 @@ public class MoveInimigo : MonoBehaviour
         }
         return new Vector3(Mathf.Cos(angleInDegrees * Mathf.Deg2Rad), Mathf.Sin(angleInDegrees * Mathf.Deg2Rad));
     }
-
-
 }

@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 13212452}
   - component: {fileID: 13212454}
   - component: {fileID: 13212453}
+  - component: {fileID: 13212455}
   m_Layer: 0
   m_Name: WalkBehind
   m_TagString: Untagged
@@ -729,6 +730,22 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &13212455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13212451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 0
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &15708546
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,6 +891,7 @@ GameObject:
   - component: {fileID: 44251442}
   - component: {fileID: 44251444}
   - component: {fileID: 44251443}
+  - component: {fileID: 44251445}
   m_Layer: 0
   m_Name: WalkInFront
   m_TagString: Untagged
@@ -5753,6 +5771,22 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &44251445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44251441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 0
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &110903135
 GameObject:
   m_ObjectHideFlags: 0
@@ -5768,6 +5802,7 @@ GameObject:
   - component: {fileID: 110903137}
   - component: {fileID: 110903136}
   - component: {fileID: 110903142}
+  - component: {fileID: 110903143}
   m_Layer: 0
   m_Name: Treant (3)
   m_TagString: Enemy
@@ -5824,8 +5859,8 @@ MonoBehaviour:
   _seguindoPlayer: 0
   PlayerAlive: 1
   lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
-  viewRadius: 5
-  viewAngle: 90
+  viewRadius: 7
+  viewAngle: 135
   visionOrigin: {fileID: 2048552072}
 --- !u!50 &110903138
 Rigidbody2D:
@@ -5992,6 +6027,28 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.36}
   serializedVersion: 2
   m_Radius: 0.7
+--- !u!195 &110903143
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110903135}
+  m_Enabled: 1
+  m_AgentTypeID: -1372625422
+  m_Radius: 0.38
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.09
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &143652777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6135,6 +6192,7 @@ GameObject:
   - component: {fileID: 187092241}
   - component: {fileID: 187092243}
   - component: {fileID: 187092242}
+  - component: {fileID: 187092244}
   m_Layer: 0
   m_Name: Details
   m_TagString: Untagged
@@ -14950,6 +15008,22 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &187092244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187092240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &207559681
 GameObject:
   m_ObjectHideFlags: 0
@@ -15027,6 +15101,7 @@ GameObject:
   - component: {fileID: 239336300}
   - component: {fileID: 239336299}
   - component: {fileID: 239336305}
+  - component: {fileID: 239336306}
   m_Layer: 0
   m_Name: Treant (4)
   m_TagString: Enemy
@@ -15071,7 +15146,7 @@ MonoBehaviour:
   _direcao: {fileID: 0}
   _player: {fileID: 1125504393}
   _displayer: 0
-  _distanSeguir: 15
+  _distanSeguir: 12
   _pos:
   - {fileID: 719836536}
   - {fileID: 1935620862}
@@ -15082,8 +15157,8 @@ MonoBehaviour:
   _seguindoPlayer: 0
   PlayerAlive: 1
   lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
-  viewRadius: 5
-  viewAngle: 90
+  viewRadius: 12
+  viewAngle: 135
   visionOrigin: {fileID: 1152219735}
 --- !u!50 &239336301
 Rigidbody2D:
@@ -15250,6 +15325,28 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.36}
   serializedVersion: 2
   m_Radius: 0.7
+--- !u!195 &239336306
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239336298}
+  m_Enabled: 1
+  m_AgentTypeID: -1372625422
+  m_Radius: 0.38
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.09
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &286460724
 GameObject:
   m_ObjectHideFlags: 0
@@ -15342,6 +15439,7 @@ GameObject:
   - component: {fileID: 287468882}
   - component: {fileID: 287468881}
   - component: {fileID: 287468887}
+  - component: {fileID: 287468888}
   m_Layer: 0
   m_Name: Treant (5)
   m_TagString: Enemy
@@ -15397,8 +15495,8 @@ MonoBehaviour:
   _seguindoPlayer: 0
   PlayerAlive: 1
   lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
-  viewRadius: 5
-  viewAngle: 90
+  viewRadius: 7
+  viewAngle: 135
   visionOrigin: {fileID: 629679962}
 --- !u!50 &287468883
 Rigidbody2D:
@@ -15565,6 +15663,28 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.36}
   serializedVersion: 2
   m_Radius: 0.7
+--- !u!195 &287468888
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287468880}
+  m_Enabled: 1
+  m_AgentTypeID: -1372625422
+  m_Radius: 0.38
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.09
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &325109801
 GameObject:
   m_ObjectHideFlags: 0
@@ -16710,6 +16830,7 @@ GameObject:
   - component: {fileID: 961170355}
   - component: {fileID: 961170354}
   - component: {fileID: 961170360}
+  - component: {fileID: 961170361}
   m_Layer: 0
   m_Name: Treant (9)
   m_TagString: Enemy
@@ -16766,8 +16887,8 @@ MonoBehaviour:
   _seguindoPlayer: 0
   PlayerAlive: 1
   lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
-  viewRadius: 5
-  viewAngle: 90
+  viewRadius: 7
+  viewAngle: 135
   visionOrigin: {fileID: 793199528}
 --- !u!50 &961170356
 Rigidbody2D:
@@ -16934,6 +17055,28 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.36}
   serializedVersion: 2
   m_Radius: 0.7
+--- !u!195 &961170361
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961170353}
+  m_Enabled: 1
+  m_AgentTypeID: -1372625422
+  m_Radius: 0.38
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.09
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1008077286
 GameObject:
   m_ObjectHideFlags: 0
@@ -16977,6 +17120,7 @@ GameObject:
   - component: {fileID: 1062222395}
   - component: {fileID: 1062222394}
   - component: {fileID: 1062222396}
+  - component: {fileID: 1062222397}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -35254,6 +35398,22 @@ PolygonCollider2D:
       - {x: 37.99816, y: -21.99849}
       - {x: 37.998962, y: 17.99908}
   m_UseDelaunayMesh: 0
+--- !u!114 &1062222397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062222392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 0
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &1066222713
 GameObject:
   m_ObjectHideFlags: 0
@@ -36174,6 +36334,7 @@ GameObject:
   - component: {fileID: 1428769526}
   - component: {fileID: 1428769525}
   - component: {fileID: 1428769531}
+  - component: {fileID: 1428769532}
   m_Layer: 0
   m_Name: Treant (8)
   m_TagString: Enemy
@@ -36230,8 +36391,8 @@ MonoBehaviour:
   _seguindoPlayer: 0
   PlayerAlive: 1
   lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
-  viewRadius: 5
-  viewAngle: 90
+  viewRadius: 7
+  viewAngle: 135
   visionOrigin: {fileID: 207559682}
 --- !u!50 &1428769527
 Rigidbody2D:
@@ -36398,6 +36559,28 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.36}
   serializedVersion: 2
   m_Radius: 0.7
+--- !u!195 &1428769532
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1428769524}
+  m_Enabled: 1
+  m_AgentTypeID: -1372625422
+  m_Radius: 0.38
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.09
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1505902474
 GameObject:
   m_ObjectHideFlags: 0
@@ -36413,6 +36596,7 @@ GameObject:
   - component: {fileID: 1505902476}
   - component: {fileID: 1505902475}
   - component: {fileID: 1505902481}
+  - component: {fileID: 1505902482}
   m_Layer: 0
   m_Name: Treant (10)
   m_TagString: Enemy
@@ -36468,8 +36652,8 @@ MonoBehaviour:
   _seguindoPlayer: 0
   PlayerAlive: 1
   lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
-  viewRadius: 5
-  viewAngle: 90
+  viewRadius: 7
+  viewAngle: 135
   visionOrigin: {fileID: 233669924}
 --- !u!50 &1505902477
 Rigidbody2D:
@@ -36636,6 +36820,28 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.36}
   serializedVersion: 2
   m_Radius: 0.7
+--- !u!195 &1505902482
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505902474}
+  m_Enabled: 1
+  m_AgentTypeID: -1372625422
+  m_Radius: 0.38
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.09
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1508344765
 GameObject:
   m_ObjectHideFlags: 0
@@ -36841,7 +37047,8 @@ GameObject:
   - component: {fileID: 1606613872}
   - component: {fileID: 1606613871}
   - component: {fileID: 1606613870}
-  m_Layer: 0
+  - component: {fileID: 1606613873}
+  m_Layer: 6
   m_Name: Collisions
   m_TagString: MapCollision
   m_Icon: {fileID: 0}
@@ -45843,6 +46050,22 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!114 &1606613873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606613866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &1606804903
 GameObject:
   m_ObjectHideFlags: 0
@@ -45934,6 +46157,7 @@ GameObject:
   - component: {fileID: 1699612052}
   - component: {fileID: 1699612057}
   - component: {fileID: 1699612058}
+  - component: {fileID: 1699612059}
   m_Layer: 0
   m_Name: Treant
   m_TagString: Enemy
@@ -45968,8 +46192,8 @@ MonoBehaviour:
   _seguindoPlayer: 0
   PlayerAlive: 1
   lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
-  viewRadius: 5
-  viewAngle: 90
+  viewRadius: 7
+  viewAngle: 135
   visionOrigin: {fileID: 1365394208}
 --- !u!50 &1699612053
 Rigidbody2D:
@@ -46157,6 +46381,28 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.36}
   serializedVersion: 2
   m_Radius: 0.7
+--- !u!195 &1699612059
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699612051}
+  m_Enabled: 1
+  m_AgentTypeID: -1372625422
+  m_Radius: 0.38
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.09
+  m_BaseOffset: 0
+  m_WalkableMask: 1
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1733304722
 GameObject:
   m_ObjectHideFlags: 0
@@ -46515,6 +46761,85 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!1 &1910389219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1910389222}
+  - component: {fileID: 1910389221}
+  - component: {fileID: 1910389220}
+  m_Layer: 0
+  m_Name: Navmesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1910389220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910389219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70bd44a44cd62c64fbfc1eea95b24880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideByGrid: 0
+  m_UseMeshPrefab: {fileID: 0}
+  m_CompressBounds: 0
+  m_OverrideVector: {x: 1, y: 1, z: 1}
+--- !u!114 &1910389221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910389219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e04976799df50f54ba128eff723155a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: -1372625422
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 1
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.06666667
+  m_BuildHeightMesh: 0
+  m_HideEditorLogs: 1
+  m_NavMeshData: {fileID: 0}
+--- !u!4 &1910389222
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910389219}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1924090540
 GameObject:
   m_ObjectHideFlags: 0
@@ -47083,3 +47408,4 @@ SceneRoots:
   - {fileID: 1779400795}
   - {fileID: 1245049498}
   - {fileID: 143652777}
+  - {fileID: 1910389222}

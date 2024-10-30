@@ -7,9 +7,8 @@ public class ArrowCollision : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         //Debug.Log("Flecha colidiu com : " + collision.gameObject.name);
-        if(collision.gameObject.CompareTag("Player") == false)
+        if(collision.gameObject.CompareTag("ArrowCollision") || collision.gameObject.CompareTag("Enemy"))
         {
-            // Destroy(gameObject);
             gameObject.SetActive(false);
         }
     }

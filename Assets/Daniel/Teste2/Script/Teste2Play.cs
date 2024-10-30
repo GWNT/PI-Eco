@@ -7,8 +7,8 @@ using UnityEngine.Pool;
 public class Teste2Play : MonoBehaviour
 {
     // Variáveis do player
-    public Animator _anim;
-    public float _speed;
+    Animator _anim;
+    [SerializeField] float _speed;
     Rigidbody2D _rb;
     [SerializeField] Vector2 _move;
     [SerializeField] private Vector2 _lastMoveDirection; // armazena a última direção válida
@@ -37,6 +37,7 @@ public class Teste2Play : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        _anim = GetComponent<Animator>();
         Debug.Log("Special thanks to ChatGPT ;)");
         Debug.Log("Botão esquerdo do mouse ou espaço no teclado para disparar flechas.");
     }
