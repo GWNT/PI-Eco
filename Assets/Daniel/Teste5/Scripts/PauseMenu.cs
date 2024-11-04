@@ -2,16 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
 
     public GameObject pauseMenuUI;
+    [SerializeField] private Teste2Play playerScript;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        
+    }
+
+    public void PauseOrResume(InputAction.CallbackContext value)
+    {
+        if (value.performed)
         {
             if (GameIsPaused)
             {
@@ -29,12 +36,16 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
+        
+        playerScript.enabled = true;
     }
     void Pause()
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
+        
+        playerScript.enabled = false;
     }
 
     public void LoadMenu()

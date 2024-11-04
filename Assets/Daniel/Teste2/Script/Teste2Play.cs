@@ -94,6 +94,9 @@ public class Teste2Play : MonoBehaviour
 
     public void SetAttack(InputAction.CallbackContext value)
     {
+        if (PauseMenu.GameIsPaused == true)
+            return;
+        
         if (value.performed && _canShoot && !IsAnimationPlaying("Attack"))
         {
             _anim.SetBool("Atacando", true); // define Atacando como true
