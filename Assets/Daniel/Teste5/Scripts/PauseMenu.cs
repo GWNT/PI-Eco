@@ -11,9 +11,9 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     [SerializeField] private Teste2Play playerScript;
 
-    void Update()
+    void Start()
     {
-        
+        pauseMenuUI.SetActive(false);
     }
 
     public void PauseOrResume(InputAction.CallbackContext value)

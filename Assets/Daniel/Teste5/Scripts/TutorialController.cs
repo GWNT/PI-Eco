@@ -43,6 +43,8 @@ public class TutorialController : MonoBehaviour
 
     void ShowTutorial()
     {
+        tutorialImage.gameObject.SetActive(true);
+
         if (Gamepad.current != null)
         {
             string deviceName = Gamepad.current.name;
