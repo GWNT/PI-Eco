@@ -38,8 +38,9 @@ public class Teste2Play : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         _anim = GetComponent<Animator>();
-        Debug.Log("Special thanks to ChatGPT ;)");
-        Debug.Log("Botão esquerdo do mouse ou espaço no teclado para disparar flechas.");
+        //Debug.Log("Special thanks to ChatGPT ;)");
+        //Debug.Log("Botão esquerdo do mouse ou espaço no teclado para disparar flechas.");
+        //Debug.Log("Odeio calvos");
     }
 
     void Update()
@@ -94,7 +95,7 @@ public class Teste2Play : MonoBehaviour
 
     public void SetAttack(InputAction.CallbackContext value)
     {
-        if (PauseMenu.GameIsPaused == true)
+        if (PauseMenu.GameIsPaused == true || TutorialController.GameStarted == false) 
             return;
         
         if (value.performed && _canShoot && !IsAnimationPlaying("Attack"))
