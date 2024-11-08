@@ -8,6 +8,7 @@ public class Menu : MonoBehaviour
     [SerializeField] GameObject MainMenu;
     [SerializeField] GameObject HelpMenu;
     [SerializeField] GameObject Controles;
+    [SerializeField] GameObject ConfirmacaoSair;
 
 
     void Start()
@@ -15,6 +16,7 @@ public class Menu : MonoBehaviour
         MainMenu.SetActive(true);
         HelpMenu.SetActive(false);
         Controles.SetActive(false);
+        ConfirmacaoSair.SetActive(false);
     }
 
     public void Jogar()
