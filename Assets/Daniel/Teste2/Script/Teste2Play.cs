@@ -6,47 +6,50 @@ using UnityEngine.Pool;
 
 public class Teste2Play : MonoBehaviour
 {
-    // Variáveis do player
-    Animator _anim;
+    [Header("Variáveis do Player")]
     [SerializeField] float _speed;
-    Rigidbody2D _rb;
     [SerializeField] Vector2 _move;
     [SerializeField] private Vector2 _lastMoveDirection; // armazena a última direção válida
-    public bool _andando;
-    private bool _canMove = true; // controla se o player pode se mover
-    private Vector2 _storedMove; // armazena a entrada de movimento enquanto o movimento está bloqueado
-    public float _attackAnimationDuration = 0.4f; // Tempo fixo para duração da animação de ataque
-    public float knockbackForce = 10f;  // Ajuste a força do impulso como preferir
-    public bool isInvulnerable = false;
-    public float invulnerableDuration = 0.5f;
-    public int numberOfFlashes = 4; // Número de piscadas
-    private SpriteRenderer spriteRenderer;
+    [SerializeField] Vector2 _storedMove; // armazena a entrada de movimento enquanto o movimento está bloqueado
+    [SerializeField] float knockbackForce = 20f;
 
-    // Life na HUD
-    public LifeControl LifeScript;
+    Animator _anim;
+    Rigidbody2D _rb;
+    SpriteRenderer spriteRenderer;
+    bool _andando;
+    bool _canMove = true;
+    bool _canShoot = true; // controla se o player pode disparar
+    float _attackAnimationDuration = 0.4f; 
+    bool isInvulnerable = false;
+    float invulnerableDuration = 1f;
+    int numberOfFlashes = 10;  
 
-    // Variáveis da flecha
-    public GameObject _arrowPrefab; // Prefab da flecha
-    public Transform _arrowSpawnPoint; // ponto de spawn da flecha
-    public float _arrowSpeed = 10f; // velocidade da flecha
-    public float _shootCooldown = 0.5f; // intervalo de tempo entre os disparos
-    private bool _canShoot = true; // controla se o player pode disparar
-    [SerializeField] Vector2 shootDirection; // direção do disparo
+    // Script que controla a Life na HUD
+    LifeControl LifeScript;
+    // Game Controller
+    GameController gameController;
+
+    [Header("Variáveis da Flecha")]
+    [SerializeField] GameObject _arrowPrefab; 
+    [SerializeField] Transform _arrowSpawnPoint; 
+    float _arrowSpeed = 10f; 
+    float _shootCooldown = 0.5f; 
+    [SerializeField] Vector2 shootDirection; 
 
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         _anim = GetComponent<Animator>();
-        //Debug.Log("Special thanks to ChatGPT ;)");
-        //Debug.Log("Botão esquerdo do mouse ou espaço no teclado para disparar flechas.");
-        //Debug.Log("Odeio calvos");
+
+        LifeScript = Camera.main.GetComponent<LifeControl>();
+        gameController = Camera.main.GetComponent<GameController>();
     }
 
     void Update()
     {
         if (_canMove)
-        {
+        { 
             _andando = (_move.x != 0 || _move.y != 0);
 
             if (_andando)
@@ -59,15 +62,13 @@ public class Teste2Play : MonoBehaviour
         }
 
         LifeScript.CheckMorte();
-        // se quiser deixar o player imortal para testes, descomentar a linha abaixo
-        // LifeScript.GanharVida();  // deixando player regenerar vida continuamente para fazer testes de colisão com inimigos
     }
 
     void FixedUpdate()
     {
         if (_canMove)
         {
-            _rb.MovePosition(_rb.position + _move.normalized * _speed * Time.fixedDeltaTime);
+            _rb.MovePosition(_rb.position + _move.normalized * _speed * Time.fixedDeltaTime);  // move o personagem
         }
     }
 
@@ -76,7 +77,7 @@ public class Teste2Play : MonoBehaviour
         // Verifica se o input é válido e se está no estado de "performed"
         if (value.action != null && value.performed)
         {
-            _storedMove = value.ReadValue<Vector3>(); // Armazena o movimento temporariamente
+            _storedMove = value.ReadValue<Vector3>().normalized; // Armazena o movimento temporariamente
 
             if (_canMove)
             {
@@ -87,11 +88,10 @@ public class Teste2Play : MonoBehaviour
         // Quando o input for "canceled", paramos o movimento
         if (value.canceled)
         {
+            Debug.Log("Cancelado.");
             _move = Vector2.zero;
         }
     }
-
-
 
     public void SetAttack(InputAction.CallbackContext value)
     {
@@ -100,11 +100,11 @@ public class Teste2Play : MonoBehaviour
         
         if (value.performed && _canShoot && !IsAnimationPlaying("Attack"))
         {
-            _anim.SetBool("Atacando", true); // define Atacando como true
+            _anim.SetBool("Atacando", true); 
             _move = Vector2.zero; // força o movimento a zero ao iniciar o ataque
             ShootArrow();
-            StartCoroutine(ShootCooldown()); // inicia o cooldown
-            StartCoroutine(DisableMovementDuringAttack()); // desativa o movimento durante o ataque
+            StartCoroutine(ShootCooldown()); 
+            StartCoroutine(DisableMovementDuringAttack()); 
         }
     }
 
@@ -180,7 +180,7 @@ public class Teste2Play : MonoBehaviour
         yield return new WaitForSeconds(_attackAnimationDuration);
 
         _canMove = true;
-        _move = _storedMove; // restaura o movimento armazenado
+        //_move = _storedMove.normalized; // restaura o movimento armazenado ----  linha do B.O
         _anim.SetBool("Atacando", false);
     }
 
@@ -204,7 +204,7 @@ public class Teste2Play : MonoBehaviour
             // Garante que o knockbackDirection não seja zero
             if (knockbackDirection == Vector2.zero)
             {
-                knockbackDirection = Vector2.up; // Define uma direção padrão
+                knockbackDirection = Vector2.up;
             }
 
             // Aplica a força de knockback imediatamente
@@ -221,11 +221,11 @@ public class Teste2Play : MonoBehaviour
     {
         _canMove = false;  // Impede o movimento temporariamente
 
-        yield return new WaitForSeconds(0.1f);  // Ajuste o tempo conforme necessário
+        yield return new WaitForSeconds(0.1f);
 
         _canMove = true;   // Libera o movimento novamente
         _rb.velocity = Vector2.zero;  // Reseta a velocidade para evitar movimento indesejado
-        _move = _storedMove;  // restaura o movimento armazenado
+        //_move = _storedMove;  // restaura o movimento armazenado ----  linha do B.O
     }
 
     private IEnumerator BecomeTemporarilyInvulnerable()
@@ -235,11 +235,9 @@ public class Teste2Play : MonoBehaviour
         // Faz o player ficar piscando
         for (int i = 0; i < numberOfFlashes; i++)
         {
-            // Deixa o player parcialmente transparente (50%)
             spriteRenderer.color = new Color(1, 1, 1, 0.5f);
             yield return new WaitForSeconds(invulnerableDuration / (numberOfFlashes * 2));
 
-            // Volta o player para opaco
             spriteRenderer.color = new Color(1, 1, 1, 1);
             yield return new WaitForSeconds(invulnerableDuration / (numberOfFlashes * 2));
         }

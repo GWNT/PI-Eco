@@ -17,7 +17,6 @@ public class TutorialController : MonoBehaviour
     private bool tutorialVisible = true;
 
     // Testes> 
-    bool firstRun = true;  //verificar se é a primeira run
     public static bool GameStarted = false;
 
     void Start()
