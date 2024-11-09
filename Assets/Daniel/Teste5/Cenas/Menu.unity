@@ -1232,8 +1232,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2030953764}
-        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+      - m_Target: {fileID: 1583748649}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
         m_MethodName: Jogar
         m_Mode: 1
         m_Arguments:
@@ -1434,7 +1434,6 @@ GameObject:
   - component: {fileID: 1071606529}
   - component: {fileID: 1071606531}
   - component: {fileID: 1071606530}
-  - component: {fileID: 1071606532}
   m_Layer: 5
   m_Name: Menu2
   m_TagString: Untagged
@@ -1495,21 +1494,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1071606528}
   m_CullTransparentMesh: 1
---- !u!114 &1071606532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1071606528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec380469e8ef5be48b32bfd255f38f77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _itemMenu:
-  - {fileID: 1590907791}
-  - {fileID: 1688204393}
 --- !u!1 &1147075701
 GameObject:
   m_ObjectHideFlags: 0
@@ -1781,7 +1765,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1302, y: -52.899994}
+  m_AnchoredPosition: {x: 1302, y: -52.9}
   m_SizeDelta: {x: 263.4, y: 105.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1232967197
@@ -2448,8 +2432,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2030953764}
-        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+      - m_Target: {fileID: 1941095724}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
@@ -3908,7 +3892,6 @@ GameObject:
   - component: {fileID: 2030953763}
   - component: {fileID: 2030953762}
   - component: {fileID: 2030953761}
-  - component: {fileID: 2030953764}
   - component: {fileID: 2030953765}
   - component: {fileID: 2030953766}
   m_Layer: 0
@@ -3992,22 +3975,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2030953764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2030953760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 155e8380595f3c0438d9f52291494b5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MainMenu: {fileID: 1583748647}
-  HelpMenu: {fileID: 1180166776}
-  Controles: {fileID: 1054738900}
-  ConfirmacaoSair: {fileID: 1941095722}
 --- !u!114 &2030953765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4557,7 +4524,6 @@ GameObject:
   - component: {fileID: 2144211660}
   - component: {fileID: 2144211663}
   - component: {fileID: 2144211661}
-  - component: {fileID: 2144211664}
   m_Layer: 5
   m_Name: Menu1
   m_TagString: Untagged
@@ -4619,22 +4585,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2144211659}
   m_CullTransparentMesh: 1
---- !u!114 &2144211664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2144211659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec380469e8ef5be48b32bfd255f38f77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _itemMenu:
-  - {fileID: 655104618}
-  - {fileID: 359972898}
-  - {fileID: 1538776874}
 --- !u!1 &2147114020
 GameObject:
   m_ObjectHideFlags: 0

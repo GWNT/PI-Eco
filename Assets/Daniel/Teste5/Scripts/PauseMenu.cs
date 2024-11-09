@@ -16,7 +16,7 @@ public class PauseMenu : MonoBehaviour
 
     void Start()
     {
-        pauseMenuUI.SetActive(false);
+        CloseAllMenus();
     }
 
     public void PauseOrResume(InputAction.CallbackContext value)
@@ -59,12 +59,6 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         GameIsPaused = false;
         SceneManager.LoadScene("Menu");
-    }
-
-    public void QuitGame()
-    {
-        Debug.Log("Quitting game...");
-        Application.Quit();
     }
 
     public void SelectButton(int i)

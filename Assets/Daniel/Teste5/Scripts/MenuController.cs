@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
@@ -34,5 +35,20 @@ public class MenuController : MonoBehaviour
             _itemMenu[i].DOScale(1f, .15f);
 
         }
+    }
+
+    public void Jogar()
+    {
+        SceneManager.LoadScene("Game");
+    }
+
+    public void QuitGame()
+    {
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+            Debug.Log("Quitting game...");
+        #endif
     }
 }
