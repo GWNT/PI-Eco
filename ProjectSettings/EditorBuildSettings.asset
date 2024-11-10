@@ -8,10 +8,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Tiny RPG Forest/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Daniel/Teste5/Cenas/Menu.unity
+  - enabled: 0
+    path: Assets/Daniel/Teste5/Cenas/AntigoMenu.unity
     guid: f2c88ec350465ae43b4ada5477499474
   - enabled: 1
     path: Assets/Daniel/Teste5/Cenas/Game.unity
     guid: 519560a0d92574c4298ba4034548c031
+  - enabled: 1
+    path: Assets/Daniel/Teste5/Cenas/Menu.unity
+    guid: 8a1b2f7beb1a654458d4127dc24c25bb
   m_configObjects: {}
