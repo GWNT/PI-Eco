@@ -88,7 +88,7 @@ public class Teste2Play : MonoBehaviour
         // Quando o input for "canceled", paramos o movimento
         if (value.canceled)
         {
-            Debug.Log("Cancelado.");
+            //Debug.Log("Cancelado.");
             _move = Vector2.zero;
         }
     }
