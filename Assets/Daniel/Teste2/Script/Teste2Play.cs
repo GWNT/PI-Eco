@@ -22,7 +22,8 @@ public class Teste2Play : MonoBehaviour
     float _attackAnimationDuration = 0.4f; 
     bool isInvulnerable = false;
     float invulnerableDuration = 1f;
-    int numberOfFlashes = 10;  
+    int numberOfFlashes = 10;
+    string MoveInput;  // evitar que o player se mova sozinho através de uma verificação
 
     // Script que controla a Life na HUD
     LifeControl LifeScript;
@@ -77,6 +78,7 @@ public class Teste2Play : MonoBehaviour
         // Verifica se o input é válido e se está no estado de "performed"
         if (value.action != null && value.performed)
         {
+            MoveInput = "performed";
             _storedMove = value.ReadValue<Vector3>().normalized; // Armazena o movimento temporariamente
 
             if (_canMove)
@@ -88,7 +90,7 @@ public class Teste2Play : MonoBehaviour
         // Quando o input for "canceled", paramos o movimento
         if (value.canceled)
         {
-            //Debug.Log("Cancelado.");
+            MoveInput = "canceled";
             _move = Vector2.zero;
         }
     }
@@ -180,8 +182,15 @@ public class Teste2Play : MonoBehaviour
         yield return new WaitForSeconds(_attackAnimationDuration);
 
         _canMove = true;
-        //_move = _storedMove.normalized; // restaura o movimento armazenado ----  linha do B.O
         _anim.SetBool("Atacando", false);
+
+        if(MoveInput == "performed")
+        {
+            _move = _storedMove;
+        } else if (MoveInput == "canceled")
+        {
+            _move = Vector2.zero;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -225,7 +234,15 @@ public class Teste2Play : MonoBehaviour
 
         _canMove = true;   // Libera o movimento novamente
         _rb.velocity = Vector2.zero;  // Reseta a velocidade para evitar movimento indesejado
-        //_move = _storedMove;  // restaura o movimento armazenado ----  linha do B.O
+
+        if (MoveInput == "performed")
+        {
+            _move = _storedMove;
+        }
+        else if (MoveInput == "canceled")
+        {
+            _move = Vector2.zero;
+        }
     }
 
     private IEnumerator BecomeTemporarilyInvulnerable()
