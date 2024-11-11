@@ -6,28 +6,21 @@ using UnityEngine.InputSystem.Controls;
 
 public class TutorialController : MonoBehaviour
 {
-    // Sprites de tutoriais para Xbox, PlayStation e teclado
-    public Sprite xboxTutorial;
-    public Sprite playstationTutorial;
-    public Sprite keyboardTutorial;
+    // Tutoriais para Xbox, PlayStation e teclado
+    public GameObject xboxTutorial;
+    public GameObject playstationTutorial;
+    public GameObject keyboardTutorial;
 
-    // Referência ao componente de imagem do tutorial
-    public UnityEngine.UI.Image tutorialImage;
+    public GameObject MenuControles;
+    public GameObject MenuControlesBotaoVoltar;
 
     private bool tutorialVisible = true;
 
-    // Testes> 
     public static bool GameStarted = false;
 
     void Start()
     {
         ShowTutorial();
-        /*
-        if (firstRun)
-        {
-            ShowTutorial();
-            firstRun = false;
-        } */
     }
 
     void Update()
@@ -42,7 +35,8 @@ public class TutorialController : MonoBehaviour
 
     void ShowTutorial()
     {
-        tutorialImage.gameObject.SetActive(true);
+        MenuControlesBotaoVoltar.SetActive(false);
+        MenuControles.SetActive(true);
 
         if (Gamepad.current != null)
         {
@@ -51,27 +45,32 @@ public class TutorialController : MonoBehaviour
             if (deviceName.Contains("DualShock") || deviceName.Contains("DualSense"))
             {
                 // Controle de PlayStation
-                tutorialImage.sprite = playstationTutorial;
+                playstationTutorial.SetActive(true);
                 Debug.Log("Controle Xbox detectado: " + deviceName);
             }
             else if (deviceName.Contains("XInput") || deviceName.Contains("Xbox"))
             {
                 // Controle de Xbox
-                tutorialImage.sprite = xboxTutorial;
+                xboxTutorial.SetActive(true); 
                 Debug.Log("Controle Playstation detectado: " + deviceName);
             }
         }
         else
         {
             // Nenhum controle conectado, mostrar tutorial de teclado
-            tutorialImage.sprite = keyboardTutorial;
+            keyboardTutorial.SetActive(true); 
             Debug.Log("Nenhum controle detectado. Exibindo tutorial para teclado.");
         }
     }
 
     void HideTutorial()
     {
-        tutorialImage.gameObject.SetActive(false);
+        MenuControles.SetActive(false);
+        MenuControlesBotaoVoltar.SetActive(true);
+
+        xboxTutorial.SetActive(false);
+        playstationTutorial.SetActive(false);
+        keyboardTutorial.SetActive(false);
         tutorialVisible = false;
     }
 
