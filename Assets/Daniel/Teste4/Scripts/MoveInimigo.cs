@@ -12,6 +12,7 @@ public class MoveInimigo : MonoBehaviour
     [SerializeField] float viewRadius = 7f;  // Alcance da visão
     [SerializeField] float viewAngle = 135f;  // Ângulo da visão
     [SerializeField] bool Boss = false;
+    [SerializeField] bool BossAtivo = false;
 
     [Header("Variáveis de controle gerais")]
     public Transform _direcao;
@@ -21,6 +22,7 @@ public class MoveInimigo : MonoBehaviour
     public GameObject treePrefab;  // Prefab da árvore a ser spawnada
     public Transform[] _pos;
     public Transform visionOrigin; // O GameObject filho
+    public Transform BossStart;  // local onde o boss vai aparecer
     
 
 
@@ -48,6 +50,8 @@ public class MoveInimigo : MonoBehaviour
         {
             viewRadius = _distanSeguir = 12;
             HP = 10;
+            _collider.enabled = false;
+            
         }
     }
 
@@ -73,6 +77,16 @@ public class MoveInimigo : MonoBehaviour
             _seguindoPlayer = false;
             _direcao = _pos[0];
             listPos = 0;
+        }
+
+        if(Boss && !BossAtivo)
+        {
+            _speed = 0;
+            if(gameController.purificouTodosInimigos)
+            {
+                _speed = 3;
+                _direcao = BossStart;
+            }
         }
 
         // Se não houver obstáculo, mover na direção normal
@@ -104,6 +118,14 @@ public class MoveInimigo : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
+            MudaDirecao();
+        }
+        
+        if(Boss && collision.gameObject.name == "BossStart")
+        {
+            Debug.Log("Boss chegou.");
+            BossAtivo = true;
+            _collider.enabled = true;
             MudaDirecao();
         }
     }

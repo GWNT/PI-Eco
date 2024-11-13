@@ -15595,6 +15595,7 @@ MonoBehaviour:
   viewRadius: 7
   viewAngle: 135
   Boss: 0
+  BossAtivo: 0
   _direcao: {fileID: 0}
   _player: {fileID: 1125504393}
   _displayer: 0
@@ -15604,6 +15605,7 @@ MonoBehaviour:
   - {fileID: 1541162305}
   - {fileID: 641768265}
   visionOrigin: {fileID: 2048552072}
+  BossStart: {fileID: 0}
 --- !u!50 &110903138
 Rigidbody2D:
   serializedVersion: 4
@@ -16995,6 +16997,7 @@ MonoBehaviour:
   viewRadius: 12
   viewAngle: 135
   Boss: 1
+  BossAtivo: 0
   _direcao: {fileID: 0}
   _player: {fileID: 1125504393}
   _displayer: 0
@@ -17004,6 +17007,7 @@ MonoBehaviour:
   - {fileID: 719836536}
   - {fileID: 1935620862}
   visionOrigin: {fileID: 1152219735}
+  BossStart: {fileID: 1944228849}
 --- !u!50 &239336301
 Rigidbody2D:
   serializedVersion: 4
@@ -17127,7 +17131,7 @@ Transform:
   m_GameObject: {fileID: 239336298}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -27.16, y: -6.7, z: 0.14618528}
+  m_LocalPosition: {x: -33.8, y: -4.5, z: 0.14618528}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17517,6 +17521,7 @@ MonoBehaviour:
   viewRadius: 7
   viewAngle: 135
   Boss: 0
+  BossAtivo: 0
   _direcao: {fileID: 0}
   _player: {fileID: 1125504393}
   _displayer: 0
@@ -17526,6 +17531,7 @@ MonoBehaviour:
   - {fileID: 475191262}
   - {fileID: 1898421171}
   visionOrigin: {fileID: 629679962}
+  BossStart: {fileID: 0}
 --- !u!50 &287468883
 Rigidbody2D:
   serializedVersion: 4
@@ -26299,6 +26305,7 @@ MonoBehaviour:
   viewRadius: 7
   viewAngle: 135
   Boss: 0
+  BossAtivo: 0
   _direcao: {fileID: 0}
   _player: {fileID: 1125504393}
   _displayer: 0
@@ -26308,6 +26315,7 @@ MonoBehaviour:
   - {fileID: 641768265}
   - {fileID: 1645275743}
   visionOrigin: {fileID: 847649111}
+  BossStart: {fileID: 0}
 --- !u!50 &634156480
 Rigidbody2D:
   serializedVersion: 4
@@ -28557,6 +28565,7 @@ MonoBehaviour:
   viewRadius: 7
   viewAngle: 135
   Boss: 0
+  BossAtivo: 0
   _direcao: {fileID: 0}
   _player: {fileID: 1125504393}
   _displayer: 0
@@ -28567,6 +28576,7 @@ MonoBehaviour:
   - {fileID: 40885465}
   - {fileID: 719836536}
   visionOrigin: {fileID: 793199528}
+  BossStart: {fileID: 0}
 --- !u!50 &961170356
 Rigidbody2D:
   serializedVersion: 4
@@ -47517,6 +47527,7 @@ MonoBehaviour:
   inimigosDerrotados: 0
   purificouInimigo: 0
   purificouTodosInimigos: 0
+  bossDerrotado: 0
 --- !u!1 &1069801465
 GameObject:
   m_ObjectHideFlags: 0
@@ -49458,6 +49469,7 @@ MonoBehaviour:
   viewRadius: 7
   viewAngle: 135
   Boss: 0
+  BossAtivo: 0
   _direcao: {fileID: 0}
   _player: {fileID: 1125504393}
   _displayer: 0
@@ -49468,6 +49480,7 @@ MonoBehaviour:
   - {fileID: 665177764}
   - {fileID: 40885465}
   visionOrigin: {fileID: 207559682}
+  BossStart: {fileID: 0}
 --- !u!50 &1428769527
 Rigidbody2D:
   serializedVersion: 4
@@ -50340,6 +50353,7 @@ MonoBehaviour:
   viewRadius: 7
   viewAngle: 135
   Boss: 0
+  BossAtivo: 0
   _direcao: {fileID: 0}
   _player: {fileID: 1125504393}
   _displayer: 0
@@ -50349,6 +50363,7 @@ MonoBehaviour:
   - {fileID: 1541162305}
   - {fileID: 1070220933}
   visionOrigin: {fileID: 233669924}
+  BossStart: {fileID: 0}
 --- !u!50 &1505902477
 Rigidbody2D:
   serializedVersion: 4
@@ -60712,6 +60727,7 @@ MonoBehaviour:
   viewRadius: 7
   viewAngle: 135
   Boss: 0
+  BossAtivo: 0
   _direcao: {fileID: 0}
   _player: {fileID: 1125504393}
   _displayer: 0
@@ -60722,6 +60738,7 @@ MonoBehaviour:
   - {fileID: 665177764}
   - {fileID: 40885465}
   visionOrigin: {fileID: 1365394208}
+  BossStart: {fileID: 0}
 --- !u!50 &1699612053
 Rigidbody2D:
   serializedVersion: 4
