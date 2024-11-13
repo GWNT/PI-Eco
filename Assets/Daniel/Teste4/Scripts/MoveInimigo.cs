@@ -134,6 +134,10 @@ public class MoveInimigo : MonoBehaviour
             if (HP == 0)
             {
                 gameController.inimigosDerrotados += 1;
+                if(Boss)
+                {
+                    gameController.bossDerrotado = true;
+                }
 
                 _anim.SetBool("Morto", true);
                 Destroy(gameObject);

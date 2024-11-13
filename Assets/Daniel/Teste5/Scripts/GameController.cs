@@ -23,6 +23,7 @@ public class GameController : MonoBehaviour
     public int inimigosDerrotados = 0;
     public bool purificouInimigo = false;
     public bool purificouTodosInimigos = false;
+    public bool bossDerrotado = false;
 
     void Start()
     {
@@ -65,6 +66,12 @@ public class GameController : MonoBehaviour
         {
             StartCoroutine(ShowHistory(2));
             purificouTodosInimigos = true;
+        }
+
+        if (inimigosDerrotados == 8 && bossDerrotado)
+        {
+            StartCoroutine(ShowHistory(3));
+            bossDerrotado = false; // evitar repetição
         }
 
     }

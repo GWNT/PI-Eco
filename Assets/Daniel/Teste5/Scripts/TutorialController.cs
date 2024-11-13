@@ -50,13 +50,13 @@ public class TutorialController : MonoBehaviour
             {
                 // Controle de PlayStation
                 playstationTutorial.SetActive(true);
-                Debug.Log("Controle Xbox detectado: " + deviceName);
+                Debug.Log("Controle Playstation detectado: " + deviceName);
             }
             else if (deviceName.Contains("XInput") || deviceName.Contains("Xbox"))
             {
                 // Controle de Xbox
                 xboxTutorial.SetActive(true); 
-                Debug.Log("Controle Playstation detectado: " + deviceName);
+                Debug.Log("Controle Xbox detectado: " + deviceName);
             }
         }
         else
@@ -76,28 +76,5 @@ public class TutorialController : MonoBehaviour
         playstationTutorial.SetActive(false);
         keyboardTutorial.SetActive(false);
         tutorialVisible = false;
-    }
-
-    bool AnyInputDetected()
-    {
-        // Verifica se qualquer tecla foi pressionada no teclado
-        if (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame)
-        {
-            return true;
-        }
-
-        // Verifica se qualquer botão foi pressionado no gamepad
-        if (Gamepad.current != null)
-        {
-            foreach (var control in Gamepad.current.allControls)
-            {
-                if (control is ButtonControl button && button.wasPressedThisFrame)
-                {
-                    return true;
-                }
-            }
-        }
-
-        return false;
     }
 }
