@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public AudioSource backgroundMusic;
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        
+        if (PauseMenu.GameIsPaused)
+        {
+            backgroundMusic.Pause();
+        } else if (!PauseMenu.GameIsPaused)
+        {
+            backgroundMusic.UnPause();
+        }
     }
 }

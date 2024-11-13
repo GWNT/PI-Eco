@@ -15623,24 +15623,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3443d50a21909d40bbbcea8bab9450b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HP: 3
   _speed: 3
+  _distanSeguir: 7
+  viewRadius: 7
+  viewAngle: 135
+  Boss: 0
   _direcao: {fileID: 0}
   _player: {fileID: 1125504393}
   _displayer: 0
-  _distanSeguir: 7
-  _pos:
-  - {fileID: 1898421171}
-  - {fileID: 1070220933}
-  - {fileID: 1935620862}
-  _andando: 0
-  direcao: {x: 0, y: 0}
-  HP: 3
-  listPos: 0
-  _seguindoPlayer: 0
-  PlayerAlive: 1
   lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
-  viewRadius: 7
-  viewAngle: 135
+  _pos:
+  - {fileID: 1541162305}
+  - {fileID: 641768265}
   visionOrigin: {fileID: 2048552072}
 --- !u!50 &110903138
 Rigidbody2D:
@@ -15765,7 +15760,7 @@ Transform:
   m_GameObject: {fileID: 110903135}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -24.168869, y: -10.802865, z: 0.14618528}
+  m_LocalPosition: {x: 1.08, y: 5.67, z: 0.14618528}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16921,7 +16916,7 @@ GameObject:
   - component: {fileID: 239336299}
   - component: {fileID: 239336305}
   m_Layer: 0
-  m_Name: Treant (4)
+  m_Name: Boss Treant
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16960,23 +16955,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3443d50a21909d40bbbcea8bab9450b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 2
+  HP: 10
+  _speed: 3
+  _distanSeguir: 12
+  viewRadius: 12
+  viewAngle: 135
+  Boss: 1
   _direcao: {fileID: 0}
   _player: {fileID: 1125504393}
   _displayer: 0
-  _distanSeguir: 12
+  lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
   _pos:
   - {fileID: 719836536}
   - {fileID: 1935620862}
-  _andando: 0
-  direcao: {x: 0, y: 0}
-  HP: 10
-  listPos: 0
-  _seguindoPlayer: 0
-  PlayerAlive: 1
-  lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
-  viewRadius: 12
-  viewAngle: 135
   visionOrigin: {fileID: 1152219735}
 --- !u!50 &239336301
 Rigidbody2D:
@@ -17350,23 +17341,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3443d50a21909d40bbbcea8bab9450b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HP: 3
   _speed: 3
+  _distanSeguir: 7
+  viewRadius: 7
+  viewAngle: 135
+  Boss: 0
   _direcao: {fileID: 0}
   _player: {fileID: 1125504393}
   _displayer: 0
-  _distanSeguir: 7
+  lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
   _pos:
   - {fileID: 475191262}
   - {fileID: 1898421171}
-  _andando: 0
-  direcao: {x: 0, y: 0}
-  HP: 3
-  listPos: 0
-  _seguindoPlayer: 0
-  PlayerAlive: 1
-  lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
-  viewRadius: 7
-  viewAngle: 135
   visionOrigin: {fileID: 629679962}
 --- !u!50 &287468883
 Rigidbody2D:
@@ -17491,7 +17478,7 @@ Transform:
   m_GameObject: {fileID: 287468880}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.02, y: -16.28, z: 0.14618528}
+  m_LocalPosition: {x: 4.71, y: -4.58, z: 0.14618528}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -24764,7 +24751,7 @@ Transform:
   m_GameObject: {fileID: 475191261}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.78, y: -17.872866, z: 2.7160172}
+  m_LocalPosition: {x: 14.7, y: -6, z: 2.7160172}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -25940,23 +25927,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3443d50a21909d40bbbcea8bab9450b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HP: 3
   _speed: 3
+  _distanSeguir: 7
+  viewRadius: 7
+  viewAngle: 135
+  Boss: 0
   _direcao: {fileID: 0}
   _player: {fileID: 1125504393}
   _displayer: 0
-  _distanSeguir: 7
+  lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
   _pos:
   - {fileID: 641768265}
   - {fileID: 1645275743}
-  _andando: 0
-  direcao: {x: 0, y: 0}
-  HP: 3
-  listPos: 0
-  _seguindoPlayer: 0
-  PlayerAlive: 1
-  lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
-  viewRadius: 7
-  viewAngle: 135
   visionOrigin: {fileID: 847649111}
 --- !u!50 &634156480
 Rigidbody2D:
@@ -26204,7 +26187,7 @@ Transform:
   m_GameObject: {fileID: 641768264}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 27.8, y: 5.8, z: 2.7160172}
+  m_LocalPosition: {x: 27.8, y: 6.48, z: 2.7160172}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26850,7 +26833,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 738732739a0aa7a47bf4c0a8e74cb34d, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.67
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -28063,24 +28046,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3443d50a21909d40bbbcea8bab9450b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HP: 3
   _speed: 3
+  _distanSeguir: 7
+  viewRadius: 7
+  viewAngle: 135
+  Boss: 0
   _direcao: {fileID: 0}
   _player: {fileID: 1125504393}
   _displayer: 0
-  _distanSeguir: 7
+  lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
   _pos:
   - {fileID: 1541162305}
   - {fileID: 40885465}
   - {fileID: 719836536}
-  _andando: 0
-  direcao: {x: 0, y: 0}
-  HP: 3
-  listPos: 0
-  _seguindoPlayer: 0
-  PlayerAlive: 1
-  lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
-  viewRadius: 7
-  viewAngle: 135
   visionOrigin: {fileID: 793199528}
 --- !u!50 &961170356
 Rigidbody2D:
@@ -46976,7 +46955,7 @@ Transform:
   m_GameObject: {fileID: 1066222713}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.47, y: 2.03, z: -10}
+  m_LocalPosition: {x: 2, y: -13.9, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -47033,6 +47012,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e20bbe80feb40f44aea43197b9e3192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backgroundMusic: {fileID: 746359791}
 --- !u!1 &1069801465
 GameObject:
   m_ObjectHideFlags: 0
@@ -47161,7 +47141,7 @@ Transform:
   m_GameObject: {fileID: 1070220931}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -23.36887, y: -9.352865, z: 2.7160172}
+  m_LocalPosition: {x: 17.34, y: -12.43, z: 2.7160172}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -47432,7 +47412,7 @@ Transform:
   m_GameObject: {fileID: 1125504393}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.47, y: 2.03, z: 0}
+  m_LocalPosition: {x: 2, y: -13.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -48262,6 +48242,7 @@ Transform:
   - {fileID: 40885465}
   - {fileID: 641768265}
   - {fileID: 1645275743}
+  - {fileID: 1944228849}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1245049497
@@ -48596,24 +48577,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3443d50a21909d40bbbcea8bab9450b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HP: 3
   _speed: 3
+  _distanSeguir: 7
+  viewRadius: 7
+  viewAngle: 135
+  Boss: 0
   _direcao: {fileID: 0}
   _player: {fileID: 1125504393}
   _displayer: 0
-  _distanSeguir: 7
-  _pos:
-  - {fileID: 719836536}
-  - {fileID: 1070220933}
-  - {fileID: 40885465}
-  _andando: 0
-  direcao: {x: 0, y: 0}
-  HP: 3
-  listPos: 0
-  _seguindoPlayer: 0
-  PlayerAlive: 1
   lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
-  viewRadius: 7
-  viewAngle: 135
+  _pos:
+  - {fileID: 1935620862}
+  - {fileID: 665177764}
+  - {fileID: 40885465}
   visionOrigin: {fileID: 207559682}
 --- !u!50 &1428769527
 Rigidbody2D:
@@ -49481,23 +49458,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3443d50a21909d40bbbcea8bab9450b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HP: 3
   _speed: 3
+  _distanSeguir: 7
+  viewRadius: 7
+  viewAngle: 135
+  Boss: 0
   _direcao: {fileID: 0}
   _player: {fileID: 1125504393}
   _displayer: 0
-  _distanSeguir: 7
+  lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
   _pos:
   - {fileID: 1541162305}
-  - {fileID: 719836536}
-  _andando: 0
-  direcao: {x: 0, y: 0}
-  HP: 3
-  listPos: 0
-  _seguindoPlayer: 0
-  PlayerAlive: 1
-  lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
-  viewRadius: 7
-  viewAngle: 135
+  - {fileID: 1070220933}
   visionOrigin: {fileID: 233669924}
 --- !u!50 &1505902477
 Rigidbody2D:
@@ -49622,7 +49595,7 @@ Transform:
   m_GameObject: {fileID: 1505902474}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -18.498869, y: 2.257135, z: 0.14618528}
+  m_LocalPosition: {x: -4.23, y: -0.09, z: 0.14618528}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -50011,7 +49984,7 @@ Transform:
   m_GameObject: {fileID: 1541162303}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.18, y: 5.18, z: 2.7160172}
+  m_LocalPosition: {x: -11.18, y: 6.06, z: 2.7160172}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -59789,23 +59762,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3443d50a21909d40bbbcea8bab9450b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HP: 3
   _speed: 3
+  _distanSeguir: 7
+  viewRadius: 7
+  viewAngle: 135
+  Boss: 0
   _direcao: {fileID: 0}
   _player: {fileID: 1125504393}
   _displayer: 0
-  _distanSeguir: 7
+  lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
   _pos:
   - {fileID: 1541162305}
   - {fileID: 665177764}
-  _andando: 0
-  direcao: {x: 0, y: 0}
-  HP: 3
-  listPos: 0
-  _seguindoPlayer: 0
-  PlayerAlive: 1
-  lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
-  viewRadius: 7
-  viewAngle: 135
+  - {fileID: 40885465}
   visionOrigin: {fileID: 1365394208}
 --- !u!50 &1699612053
 Rigidbody2D:
@@ -60570,7 +60540,7 @@ Transform:
   m_GameObject: {fileID: 1898421170}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -16.28, y: -17.372866, z: 2.7160172}
+  m_LocalPosition: {x: -4.16, y: -5.76, z: 2.7160172}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -60981,6 +60951,73 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1937707976}
   m_CullTransparentMesh: 1
+--- !u!1 &1944228848
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1944228849}
+  - component: {fileID: 1944228850}
+  m_Layer: 0
+  m_Name: BossStart
+  m_TagString: Waypoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1944228849
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944228848}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -24.47, y: -4.29, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1235359858}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1944228850
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944228848}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &1952981263
 GameObject:
   m_ObjectHideFlags: 0
@@ -61455,7 +61492,7 @@ Transform:
   m_GameObject: {fileID: 2006175317}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.47, y: 2.03, z: -10}
+  m_LocalPosition: {x: 2, y: -13.9, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

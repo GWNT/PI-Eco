@@ -5,45 +5,46 @@ using UnityEngine.AI;
 
 public class MoveInimigo : MonoBehaviour
 {
-    Rigidbody2D _rig2d;
-    [SerializeField] float _speed;
-    public Transform _direcao;
-    public GameObject _player;  // alterado de Transform
-    public float _displayer;
-    public float _distanSeguir;
-    public Transform[] _pos;
-    Animator _anim;
-    public bool _andando;
-    [SerializeField] Vector2 direcao;
-
-    // teste hp
+    [Header("Variáveis de controle personalizáveis")]
     [SerializeField] int HP = 3;
-    // controle waypoint por list
-    [SerializeField] int listPos = 0;
-    [SerializeField] bool _seguindoPlayer = false;
+    [SerializeField] float _speed = 3;
+    [SerializeField] float _distanSeguir;
+    [SerializeField] float viewRadius = 7f;  // Alcance da visão
+    [SerializeField] float viewAngle = 135f;  // Ângulo da visão
+    [SerializeField] bool Boss = false;
 
-    // teste -> parar de seguir player se o player morrer
-    [SerializeField] bool PlayerAlive = true;
-
-    // teste: drop de hp
+    [Header("Variáveis de controle gerais")]
+    public Transform _direcao;
+    public GameObject _player;  
+    public float _displayer;
     public GameObject lifePrefab;  // Prefab da vida a ser dropada
-
-    // Campo de visão
-    [SerializeField] float viewRadius = 5f;  // Alcance da visão
-    [SerializeField] float viewAngle = 90f;  // Ângulo da visão
+    public Transform[] _pos;
     public Transform visionOrigin; // O GameObject filho
-    
-    NavMeshAgent agent;  // teste: seguir player desviando automaticamente dos obstáculos
+
+
+    // Demais variáveis
+    Rigidbody2D _rig2d;
+    Animator _anim;
+    bool _andando;
+    Vector2 direcao;
+    bool _seguindoPlayer = false;
+    int listPos = 0;
+    bool PlayerAlive = true;
+    CapsuleCollider2D _collider;
+
 
     void Start()
     {
         _rig2d = GetComponent<Rigidbody2D>();
         _direcao = _pos[0];
         _anim = GetComponent<Animator>();
-        /*
-        agent = GetComponent<NavMeshAgent>();
-        agent.updateRotation = false;
-        agent.updateUpAxis = false; */
+        _collider = GetComponent<CapsuleCollider2D>();
+
+        if (Boss)
+        {
+            viewRadius = _distanSeguir = 12;
+            HP = 10;
+        }
     }
 
     void Update()
@@ -60,7 +61,6 @@ public class MoveInimigo : MonoBehaviour
             if (_displayer <= _distanSeguir)
             {
                 _direcao = _player.transform;
-                //agent.SetDestination(_direcao.position);
                 _seguindoPlayer = true;
             }
         }
@@ -68,7 +68,6 @@ public class MoveInimigo : MonoBehaviour
         {
             _seguindoPlayer = false;
             _direcao = _pos[0];
-            //agent.SetDestination(_pos[0].position);
             listPos = 0;
         }
 
@@ -91,8 +90,6 @@ public class MoveInimigo : MonoBehaviour
     void FixedUpdate()
     {
         _rig2d.MovePosition(_rig2d.position + direcao * _speed * Time.fixedDeltaTime);
-
-        //agent.SetDestination(direcao);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -154,11 +151,10 @@ public class MoveInimigo : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToPlayer, viewRadius, mask);
             if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
-                //Debug.Log("Player detectado!");
-                return true; 
+                return true;  // Player detectado
             }
         }
-        return false; // Player está fora do campo de visão
+        return false;  // Player está fora do campo de visão
     }
 
     void OnDrawGizmos()
