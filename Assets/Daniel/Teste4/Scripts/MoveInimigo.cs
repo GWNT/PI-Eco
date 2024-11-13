@@ -18,6 +18,7 @@ public class MoveInimigo : MonoBehaviour
     public GameObject _player;  
     public float _displayer;
     public GameObject lifePrefab;  // Prefab da vida a ser dropada
+    public GameObject treePrefab;  // Prefab da árvore a ser spawnada
     public Transform[] _pos;
     public Transform visionOrigin; // O GameObject filho
 
@@ -131,8 +132,9 @@ public class MoveInimigo : MonoBehaviour
             {
                 _anim.SetBool("Morto", true);
                 Destroy(gameObject);
-                // Dropar o item de vida na posição do inimigo
+                
                 Instantiate(lifePrefab, transform.position, Quaternion.identity);
+                Instantiate(treePrefab, transform.position, Quaternion.identity);
             }
         }
     }
