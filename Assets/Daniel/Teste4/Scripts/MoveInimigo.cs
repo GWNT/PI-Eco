@@ -21,6 +21,7 @@ public class MoveInimigo : MonoBehaviour
     public GameObject treePrefab;  // Prefab da árvore a ser spawnada
     public Transform[] _pos;
     public Transform visionOrigin; // O GameObject filho
+    
 
 
     // Demais variáveis
@@ -32,6 +33,7 @@ public class MoveInimigo : MonoBehaviour
     int listPos = 0;
     bool PlayerAlive = true;
     CapsuleCollider2D _collider;
+    GameController gameController;
 
 
     void Start()
@@ -40,6 +42,7 @@ public class MoveInimigo : MonoBehaviour
         _direcao = _pos[0];
         _anim = GetComponent<Animator>();
         _collider = GetComponent<CapsuleCollider2D>();
+        gameController = Camera.main.GetComponent<GameController>();
 
         if (Boss)
         {
@@ -130,6 +133,8 @@ public class MoveInimigo : MonoBehaviour
             HP -= 1;
             if (HP == 0)
             {
+                gameController.inimigosDerrotados += 1;
+
                 _anim.SetBool("Morto", true);
                 Destroy(gameObject);
                 

@@ -35,7 +35,10 @@ public class Teste2Play : MonoBehaviour
     [SerializeField] Transform _arrowSpawnPoint; 
     float _arrowSpeed = 10f; 
     float _shootCooldown = 0.5f; 
-    [SerializeField] Vector2 shootDirection; 
+    [SerializeField] Vector2 shootDirection;
+
+    [Header("Áudios")]
+    [SerializeField] AudioSource _disparoFlecha;
 
     void Start()
     {
@@ -97,7 +100,7 @@ public class Teste2Play : MonoBehaviour
 
     public void SetAttack(InputAction.CallbackContext value)
     {
-        if (PauseMenu.GameIsPaused == true || TutorialController.GameStarted == false) 
+        if (PauseMenu.GameIsPaused == true || gameController.GameStarted == false) 
             return;
         
         if (value.performed && _canShoot && !IsAnimationPlaying("Attack"))
@@ -106,7 +109,8 @@ public class Teste2Play : MonoBehaviour
             _move = Vector2.zero; // força o movimento a zero ao iniciar o ataque
             ShootArrow();
             StartCoroutine(ShootCooldown()); 
-            StartCoroutine(DisableMovementDuringAttack()); 
+            StartCoroutine(DisableMovementDuringAttack());
+            _disparoFlecha.Play();
         }
     }
 

@@ -14,22 +14,26 @@ public class TutorialController : MonoBehaviour
     public GameObject MenuControles;
     public GameObject MenuControlesBotaoVoltar;
 
+    public GameController gameController;
+
     private bool tutorialVisible = true;
 
-    public static bool GameStarted = false;
 
     void Start()
     {
+        gameController = Camera.main.GetComponent<GameController>();
+
         ShowTutorial();
     }
 
     void Update()
     {
         // Verifica se o tutorial está visível e se qualquer botão/tecla foi pressionado
-        if (tutorialVisible && AnyInputDetected())
+        if (tutorialVisible && gameController.AnyInputDetected())
         {
             HideTutorial();
-            GameStarted = true;
+            gameController.GameStarted = true;
+            gameController.canShowHistory = true;
         }
     }
 
