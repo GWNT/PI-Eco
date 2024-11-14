@@ -9,9 +9,12 @@ public class LifeControl : MonoBehaviour
     [SerializeField] Transform[] Lifes;
     [SerializeField] GameObject Player;
     [SerializeField] Transform lifeTemp;
+    [SerializeField] GameController gameController;
 
     void Start()
     {
+        gameController = Camera.main.GetComponent<GameController>();
+
         _quantLifes = 4;
         lifeTemp.gameObject.SetActive(false);
     }
@@ -60,6 +63,7 @@ public class LifeControl : MonoBehaviour
         if (_quantLifes == -1)
         {
             Debug.Log("Player morreu!");
+            gameController.playerMorreu = true;
             Player.SetActive(false);
             _quantLifes--; // só pra não ficar spamando "Player morreu!" no console
         }

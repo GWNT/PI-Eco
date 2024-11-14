@@ -19,18 +19,26 @@ public class GameController : MonoBehaviour
     public bool showingHistory = false;
     [SerializeField] private Teste2Play playerScript;
     //[SerializeField] private MoveInimigo enemyScript;
+    [SerializeField] private ImageColorController PanelController;
+
     public bool input = false;
     public int inimigosDerrotados = 0;
     public bool purificouInimigo = false;
     public bool purificouTodosInimigos = false;
     public bool bossDerrotado = false;
 
+    public bool playerMorreu = false;
+
     void Start()
     {
+        PanelController = Camera.main.GetComponent<ImageColorController>();
+
         for (int i = 0; i < historia.Count; i++)
         {
             historia[i].SetActive(false);
         }
+
+        PanelController.FadeToLight();
     }
 
     
@@ -49,11 +57,22 @@ public class GameController : MonoBehaviour
             StartCoroutine(ShowHistory(0));
         }
 
-        input = AnyInputDetected();
+        if (playerMorreu)
+        {
+            PanelController.FadeToDark();
+            playerMorreu = !playerMorreu;
+            return;
+        }
+
+        input = SpecificInputDetected();
 
         if (showingHistory && input)
         {
             HideHistory(); 
+            if (currentHistory == 4)
+            {
+                PanelController.FadeToDark();
+            }
         }
 
         if (inimigosDerrotados == 1 && !purificouInimigo)
@@ -117,6 +136,23 @@ public class GameController : MonoBehaviour
                     return true;
                 }
             }
+        }
+
+        return false;
+    }
+
+    public bool SpecificInputDetected()
+    {
+        // Verifica se a tecla Enter foi pressionada no teclado
+        if (Keyboard.current != null && Keyboard.current.enterKey.wasPressedThisFrame)
+        {
+            return true;
+        }
+
+        // Verifica se o botão sul (A no Xbox, X no PlayStation) foi pressionado no gamepad
+        if (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame)
+        {
+            return true;
         }
 
         return false;
