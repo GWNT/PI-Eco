@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ImageColorController : MonoBehaviour
 {
     public Image image;                    // O componente Image do elemento de UI
-    public float transitionDuration = 2f;  // Duração da transição em segundos
+    public float transitionDuration = 3f;  // Duração da transição em segundos
     public Color lightColor = new Color(0f, 0f, 0f, 0f); // Cor clara (RGBA)
     public Color darkColor = new Color(0f, 0f, 0f, 1f);  // Cor escura (RGBA)
 

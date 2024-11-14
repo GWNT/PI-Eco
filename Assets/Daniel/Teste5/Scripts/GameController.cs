@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
     [Header("Áudio")]
     public AudioSource backgroundMusic;
+    public AudioSource endingMusic;
+    public AudioSource playerDeathMusic;
 
     [Header("História")]
     public List<GameObject> historia;
@@ -61,6 +64,8 @@ public class GameController : MonoBehaviour
         {
             PanelController.FadeToDark();
             playerMorreu = !playerMorreu;
+            playerDeathMusic.Play();
+            Invoke("LoadScene", 3);
             return;
         }
 
@@ -72,6 +77,7 @@ public class GameController : MonoBehaviour
             if (currentHistory == 4)
             {
                 PanelController.FadeToDark();
+                endingMusic.Play();
             }
         }
 
@@ -156,5 +162,10 @@ public class GameController : MonoBehaviour
         }
 
         return false;
+    }
+
+    void LoadScene()
+    {
+        SceneManager.LoadScene("Game");
     }
 }

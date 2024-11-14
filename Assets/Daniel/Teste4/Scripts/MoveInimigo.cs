@@ -23,7 +23,7 @@ public class MoveInimigo : MonoBehaviour
     public Transform[] _pos;
     public Transform visionOrigin; // O GameObject filho
     public Transform BossStart;  // local onde o boss vai aparecer
-    
+    public AudioSource somPurificado;
 
 
     // Demais variáveis
@@ -156,6 +156,7 @@ public class MoveInimigo : MonoBehaviour
             if (HP == 0)
             {
                 gameController.inimigosDerrotados += 1;
+                somPurificado.Play();
                 if(Boss)
                 {
                     gameController.bossDerrotado = true;
