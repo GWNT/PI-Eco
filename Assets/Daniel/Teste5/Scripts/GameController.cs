@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour
     public bool GameStarted = false;
     public bool canShowHistory = false;
     public bool showingHistory = false;
+    public bool wasShowingHistory = false;
     [SerializeField] private Teste2Play playerScript;
     //[SerializeField] private MoveInimigo enemyScript;
     [SerializeField] private ImageColorController PanelController;
@@ -31,6 +32,7 @@ public class GameController : MonoBehaviour
     public bool bossDerrotado = false;
 
     public bool playerMorreu = false;
+
 
     void Start()
     {
@@ -47,17 +49,40 @@ public class GameController : MonoBehaviour
     
     void Update()
     {
+        input = SpecificInputDetected();
+
         if (PauseMenu.GameIsPaused)
         {
             backgroundMusic.Pause();
-        } else if (!PauseMenu.GameIsPaused)
+
+            if(showingHistory)
+            {
+                HideHistory();
+                currentHistory--;
+                wasShowingHistory = true;
+                Debug.Log("História ocultada devido pausamento.");
+            }
+
+            InputSystem.Update();
+            input = SpecificInputDetected();
+        } 
+        else if (!PauseMenu.GameIsPaused)
         {
             backgroundMusic.UnPause();
+
+            if(wasShowingHistory)
+            {
+                StartCoroutine(ShowHistory(currentHistory));
+                wasShowingHistory=false;
+                Debug.Log("Re-exibindo história após pausamento.");
+            }
         }
 
         if (GameStarted && canShowHistory)
         {
+            canShowHistory = false;
             StartCoroutine(ShowHistory(0));
+            Debug.Log("Exibindo primeira história.");
         }
 
         if (playerMorreu)
@@ -70,10 +95,10 @@ public class GameController : MonoBehaviour
         }
 
         input = SpecificInputDetected();
-
         if (showingHistory && input)
         {
-            HideHistory(); 
+            HideHistory();
+            Time.timeScale = 1;
             if (currentHistory == 4)
             {
                 PanelController.FadeToDark();
@@ -82,6 +107,12 @@ public class GameController : MonoBehaviour
             }
         }
 
+        HistoryControl();
+
+    }
+
+    void HistoryControl()
+    {
         if (inimigosDerrotados == 1 && !purificouInimigo)
         {
             StartCoroutine(ShowHistory(1));
@@ -99,12 +130,12 @@ public class GameController : MonoBehaviour
             StartCoroutine(ShowHistory(3));
             bossDerrotado = false; // evitar repetição
         }
-
     }
 
     IEnumerator ShowHistory(int i)
     {
         yield return new WaitForSeconds(.1f);
+        Time.timeScale = 0;
 
         historia[i].SetActive(true);
         playerScript.enabled = false;
@@ -113,10 +144,13 @@ public class GameController : MonoBehaviour
 
         showingHistory = true;
         currentHistory = i;
+
+        Debug.Log("Exibindo história.");
     }
 
     void HideHistory()
     {
+
         historia[currentHistory].SetActive(false);
         currentHistory++;
         playerScript.enabled = true;
