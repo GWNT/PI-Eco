@@ -65,7 +65,7 @@ public class GameController : MonoBehaviour
             PanelController.FadeToDark();
             playerMorreu = !playerMorreu;
             playerDeathMusic.Play();
-            Invoke("LoadScene", 3);
+            Invoke("LoadGame", 3);
             return;
         }
 
@@ -78,6 +78,7 @@ public class GameController : MonoBehaviour
             {
                 PanelController.FadeToDark();
                 endingMusic.Play();
+                Invoke("LoadMenu", 3);
             }
         }
 
@@ -164,8 +165,13 @@ public class GameController : MonoBehaviour
         return false;
     }
 
-    void LoadScene()
+    void LoadGame()
     {
         SceneManager.LoadScene("Game");
+    }
+
+    void LoadMenu()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }
