@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -16,6 +17,13 @@ public class GameController : MonoBehaviour
     public List<GameObject> historia;
     public int currentHistory;
 
+    [Header("Botoões para continuar história")]
+    public Sprite xboxBT;
+    public Sprite playstationBT;
+    public Sprite tecladoBT;
+    public Image tutorialBT;
+    public GameObject continuar;
+
     // Variáveis de controle
     public bool GameStarted = false;
     public bool canShowHistory = false;
@@ -25,8 +33,11 @@ public class GameController : MonoBehaviour
     //[SerializeField] private MoveInimigo enemyScript;
     [SerializeField] private ImageColorController PanelController;
 
+    
+
     public bool input = false;
     public int inimigosDerrotados = 0;
+    public bool podeMostrarPrimeiraHistoria = true;
     public bool purificouInimigo = false;
     public bool purificouTodosInimigos = false;
     public bool bossDerrotado = false;
@@ -78,9 +89,10 @@ public class GameController : MonoBehaviour
             }
         }
 
-        if (GameStarted && canShowHistory)
+        if (GameStarted && canShowHistory && podeMostrarPrimeiraHistoria)
         {
             canShowHistory = false;
+            podeMostrarPrimeiraHistoria = false;
             StartCoroutine(ShowHistory(0));
             Debug.Log("Exibindo primeira história.");
         }
@@ -99,7 +111,7 @@ public class GameController : MonoBehaviour
         {
             HideHistory();
             Time.timeScale = 1;
-            if (currentHistory == 4)
+            if (currentHistory == 8)
             {
                 PanelController.FadeToDark();
                 endingMusic.Play();
@@ -108,7 +120,7 @@ public class GameController : MonoBehaviour
         }
 
         HistoryControl();
-
+        CheckDevice();
     }
 
     void HistoryControl()
@@ -130,22 +142,29 @@ public class GameController : MonoBehaviour
             StartCoroutine(ShowHistory(3));
             bossDerrotado = false; // evitar repetição
         }
+
+        if (canShowHistory && currentHistory > 3 && currentHistory < 8)
+        {
+            StartCoroutine(ShowHistory(currentHistory));
+        }
     }
 
     IEnumerator ShowHistory(int i)
     {
+        canShowHistory = false;
         yield return new WaitForSeconds(.1f);
         Time.timeScale = 0;
 
         historia[i].SetActive(true);
         playerScript.enabled = false;
         //enemyScript.enabled = false;
-        canShowHistory = false;
+        
 
         showingHistory = true;
         currentHistory = i;
 
         Debug.Log("Exibindo história.");
+        continuar.SetActive(true);
     }
 
     void HideHistory()
@@ -156,7 +175,10 @@ public class GameController : MonoBehaviour
         playerScript.enabled = true;
         //enemyScript.enabled = true;
 
-        showingHistory = false; 
+        showingHistory = false;
+        canShowHistory = true;
+
+        continuar.SetActive(false);
     }
 
     public bool AnyInputDetected()
@@ -207,5 +229,26 @@ public class GameController : MonoBehaviour
     void LoadMenu()
     {
         SceneManager.LoadScene("Menu");
+    }
+
+    void CheckDevice()
+    {
+        if (Gamepad.current != null)
+        {
+            string deviceName = Gamepad.current.name;
+
+            if (deviceName.Contains("DualShock") || deviceName.Contains("DualSense"))
+            {
+                tutorialBT.sprite = playstationBT;
+            }
+            else if (deviceName.Contains("XInput") || deviceName.Contains("Xbox"))
+            {
+                tutorialBT.sprite = xboxBT;
+            }
+        }
+        else
+        {
+            tutorialBT.sprite = tecladoBT;
+        }
     }
 }
