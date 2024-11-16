@@ -103,6 +103,8 @@ public class MoveInimigo : MonoBehaviour
             _anim.SetFloat("Vertical", direcao.y);
         }
         _anim.SetBool("Andando", _andando);
+
+        StartCoroutine(VerificaPreso());
     }
 
     void FixedUpdate()
@@ -153,6 +155,14 @@ public class MoveInimigo : MonoBehaviour
         if (collision.gameObject.CompareTag("Arrow"))
         {
             HP -= 1;
+
+            _displayer = Vector2.Distance(transform.position, _player.transform.position);
+            if (!_seguindoPlayer && (_displayer <= _distanSeguir))
+            {
+                _direcao = _player.transform;
+                _seguindoPlayer = true;
+            }
+
             if (HP == 0)
             {
                 gameController.inimigosDerrotados += 1;
@@ -235,5 +245,20 @@ public class MoveInimigo : MonoBehaviour
             angleInDegrees += Mathf.Atan2(direcao.y, direcao.x) * Mathf.Rad2Deg;
         }
         return new Vector3(Mathf.Cos(angleInDegrees * Mathf.Deg2Rad), Mathf.Sin(angleInDegrees * Mathf.Deg2Rad));
+    }
+
+    IEnumerator VerificaPreso()  // função pra verificar se o mob está "preso" em alguma parte do cenário
+    {
+        Vector2 firstPosition = transform.position;
+        yield return new WaitForSeconds(2);
+        Vector2 atualPosition = transform.position;
+
+        if (firstPosition == atualPosition)
+        {
+            MudaDirecao();
+        }
+
+        firstPosition = atualPosition = Vector2.zero;
+        yield return new WaitForSeconds(1);
     }
 }
