@@ -104,6 +104,8 @@ public class MoveInimigo : MonoBehaviour
         }
         _anim.SetBool("Andando", _andando);
 
+        if(Boss && !BossAtivo) return;
+
         StartCoroutine(VerificaPreso());
     }
 
@@ -128,6 +130,7 @@ public class MoveInimigo : MonoBehaviour
             Debug.Log("Boss chegou.");
             BossAtivo = true;
             _collider.enabled = true;
+            listPos = 0;
             MudaDirecao();
         }
     }
