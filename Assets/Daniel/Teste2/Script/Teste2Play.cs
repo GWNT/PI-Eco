@@ -30,7 +30,7 @@ public class Teste2Play : MonoBehaviour
     // Game Controller
     GameController gameController;
 
-    BalaPool arrowPoolScript;
+    ArrowCollision arrowCollisionScript;
 
     [Header("Variáveis da Flecha")]
     [SerializeField] GameObject _arrowPrefab; 
@@ -50,7 +50,7 @@ public class Teste2Play : MonoBehaviour
 
         LifeScript = Camera.main.GetComponent<LifeControl>();
         gameController = Camera.main.GetComponent<GameController>();
-        arrowPoolScript = GameObject.FindObjectOfType<BalaPool>();
+        arrowCollisionScript = GameObject.FindObjectOfType<ArrowCollision>();
     }
 
     void Update()
@@ -125,9 +125,13 @@ public class Teste2Play : MonoBehaviour
             arrow.transform.position = _arrowSpawnPoint.position;
             arrow.transform.rotation = Quaternion.identity;
             arrow.SetActive(true);
-            //arrow.arrowPoolScript.AtivarColisao();
+            ArrowCollision arrowCollision = arrow.GetComponent<ArrowCollision>();
+            if (arrowCollision != null)
+            {
+                arrowCollision.ActivateCollisionWithDelay(0.1f); // Ativa a colisão após 0.1s.
+            }
         }
-        //arrowPoolScript.AtivarColisao();
+        
 
         shootDirection = _move == Vector2.zero ? _lastMoveDirection : _move.normalized;
 
@@ -186,9 +190,9 @@ public class Teste2Play : MonoBehaviour
     private IEnumerator DisableMovementDuringAttack()
     {
         _canMove = false;
-
+        _rb.MovePosition(_rb.position + _move.normalized * 0 * Time.fixedDeltaTime);
         yield return new WaitForSeconds(_attackAnimationDuration);
-
+        
         _canMove = true;
         _anim.SetBool("Atacando", false);
 

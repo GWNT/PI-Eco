@@ -4,12 +4,36 @@ using UnityEngine;
 
 public class ArrowCollision : MonoBehaviour
 {
-    BoxCollider2D collider;
+    private BoxCollider2D boxCollider;
+    private Coroutine activationCoroutine;
 
-    void Start()
+    void Awake()
     {
-        collider = GetComponent<BoxCollider2D>();
-        collider.enabled = false;
+        boxCollider = GetComponent<BoxCollider2D>();
+        boxCollider.enabled = false; // Sempre inicia desativado.
+    }
+
+    void OnEnable()
+    {
+        // Quando o objeto é ativado no pool, desativa o collider por padrão.
+        boxCollider.enabled = false;
+    }
+
+    public void ActivateCollisionWithDelay(float delay)
+    {
+        // Cancela qualquer coroutine anterior.
+        if (activationCoroutine != null)
+        {
+            StopCoroutine(activationCoroutine);
+        }
+        // Inicia uma coroutine para ativar a colisão após o delay.
+        activationCoroutine = StartCoroutine(ActivateCollisionCoroutine(delay));
+    }
+
+    private IEnumerator ActivateCollisionCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        boxCollider.enabled = true;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -19,10 +43,5 @@ public class ArrowCollision : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
-    }
-    
-    public void AtivarColisao()
-    {
-        collider.enabled = true;
     }
 }
