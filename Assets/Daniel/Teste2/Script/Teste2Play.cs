@@ -125,11 +125,6 @@ public class Teste2Play : MonoBehaviour
             arrow.transform.position = _arrowSpawnPoint.position;
             arrow.transform.rotation = Quaternion.identity;
             arrow.SetActive(true);
-            ArrowCollision arrowCollision = arrow.GetComponent<ArrowCollision>();
-            if (arrowCollision != null)
-            {
-                arrowCollision.ActivateCollisionWithDelay(0.1f); // Ativa a colisão após 0.1s.
-            }
         }
         
 
