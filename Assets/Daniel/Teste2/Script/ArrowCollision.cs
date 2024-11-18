@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class ArrowCollision : MonoBehaviour
 {
+    BoxCollider2D collider;
+
+    void Start()
+    {
+        collider = GetComponent<BoxCollider2D>();
+        collider.enabled = false;
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         //Debug.Log("Flecha colidiu com : " + collision.gameObject.name);
@@ -11,5 +19,10 @@ public class ArrowCollision : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
+    }
+    
+    public void AtivarColisao()
+    {
+        collider.enabled = true;
     }
 }

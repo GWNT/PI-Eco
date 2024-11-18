@@ -30,6 +30,8 @@ public class Teste2Play : MonoBehaviour
     // Game Controller
     GameController gameController;
 
+    BalaPool arrowPoolScript;
+
     [Header("Variáveis da Flecha")]
     [SerializeField] GameObject _arrowPrefab; 
     [SerializeField] Transform _arrowSpawnPoint; 
@@ -48,6 +50,7 @@ public class Teste2Play : MonoBehaviour
 
         LifeScript = Camera.main.GetComponent<LifeControl>();
         gameController = Camera.main.GetComponent<GameController>();
+        arrowPoolScript = GameObject.FindObjectOfType<BalaPool>();
     }
 
     void Update()
@@ -122,8 +125,9 @@ public class Teste2Play : MonoBehaviour
             arrow.transform.position = _arrowSpawnPoint.position;
             arrow.transform.rotation = Quaternion.identity;
             arrow.SetActive(true);
+            //arrow.arrowPoolScript.AtivarColisao();
         }
-
+        //arrowPoolScript.AtivarColisao();
 
         shootDirection = _move == Vector2.zero ? _lastMoveDirection : _move.normalized;
 

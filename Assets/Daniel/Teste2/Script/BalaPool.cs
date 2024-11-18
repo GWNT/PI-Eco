@@ -10,6 +10,8 @@ public class BalaPool : MonoBehaviour
     public GameObject objectToPool;
     public int amountToPool;
 
+    //BoxCollider2D collider;
+
     void Awake()
     {
         SharedInstance = this;
@@ -25,6 +27,9 @@ public class BalaPool : MonoBehaviour
             tmp.SetActive(false);
             pooledObjects.Add(tmp);
         }
+        /*
+        collider = GetComponent<BoxCollider2D>();
+        collider.enabled = false; */
     }
 
     public GameObject GetPooledObject()
@@ -38,4 +43,9 @@ public class BalaPool : MonoBehaviour
         }
         return null;
     }
+    /*
+    public void AtivarColisao()
+    {
+        collider.enabled = true;
+    } */
 }
