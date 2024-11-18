@@ -25,7 +25,6 @@ public class MoveInimigo : MonoBehaviour
     public Transform BossStart;  // local onde o boss vai aparecer
     public AudioSource somPurificado;
 
-
     // Demais variáveis
     Rigidbody2D _rig2d;
     Animator _anim;
@@ -68,8 +67,11 @@ public class MoveInimigo : MonoBehaviour
             _displayer = Vector2.Distance(transform.position, _player.transform.position);
             if (_displayer <= _distanSeguir)
             {
-                _direcao = _player.transform;
-                _seguindoPlayer = true;
+                if (!gameController.noob)
+                {
+                    _direcao = _player.transform;
+                    _seguindoPlayer = true;
+                }
             }
         }
         else if (_seguindoPlayer)
@@ -162,8 +164,12 @@ public class MoveInimigo : MonoBehaviour
             _displayer = Vector2.Distance(transform.position, _player.transform.position);
             if (!_seguindoPlayer && (_displayer <= _distanSeguir))
             {
-                _direcao = _player.transform;
-                _seguindoPlayer = true;
+                if (!gameController.noob)
+                {
+                    _direcao = _player.transform;
+                    _seguindoPlayer = true;
+                }
+                
             }
 
             if (HP == 0)
@@ -177,9 +183,13 @@ public class MoveInimigo : MonoBehaviour
 
                 _anim.SetBool("Morto", true);
                 Destroy(gameObject);
-                
-                Instantiate(lifePrefab, transform.position, Quaternion.identity);
+
                 Instantiate(treePrefab, transform.position, Quaternion.identity);
+
+                if (!gameController.noob)
+                {
+                    Instantiate(lifePrefab, transform.position, Quaternion.identity);
+                }
             }
         }
     }

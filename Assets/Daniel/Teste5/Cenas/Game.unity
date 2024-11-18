@@ -47990,7 +47990,8 @@ MonoBehaviour:
   - {fileID: 1765633271}
   Player: {fileID: 1125504393}
   lifeTemp: {fileID: 612580609}
-  gameController: {fileID: 0}
+  gameController: {fileID: 1066222721}
+  LifeHUD: {fileID: 888821161}
 --- !u!114 &1066222720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48043,6 +48044,7 @@ MonoBehaviour:
   canShowHistory: 0
   showingHistory: 0
   wasShowingHistory: 0
+  noob: 1
   playerScript: {fileID: 1125504396}
   PanelController: {fileID: 0}
   input: 0

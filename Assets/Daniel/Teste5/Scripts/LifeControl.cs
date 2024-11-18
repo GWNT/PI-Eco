@@ -10,6 +10,7 @@ public class LifeControl : MonoBehaviour
     [SerializeField] GameObject Player;
     [SerializeField] Transform lifeTemp;
     [SerializeField] GameController gameController;
+    [SerializeField] GameObject LifeHUD;
 
     void Start()
     {
@@ -21,7 +22,14 @@ public class LifeControl : MonoBehaviour
 
     void Update()
     {
-        
+        if (gameController.noob)
+        {
+            LifeHUD.SetActive(false);
+        }
+        else
+        {
+            LifeHUD.SetActive(true);
+        }
     }
 
     public void GanharVida(Transform value)
@@ -62,6 +70,7 @@ public class LifeControl : MonoBehaviour
     {
         if (_quantLifes == -1)
         {
+            if (gameController.noob) return;
             Debug.Log("Player morreu!");
             gameController.playerMorreu = true;
             Player.SetActive(false);

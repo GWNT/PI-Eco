@@ -2934,6 +2934,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: teste2-objects-recolored-2_132
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 231
+        width: 30
+        height: 25
+      alignment: 9
+      pivot: {x: 0.47287413, y: 0.18968628}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f37927682def9db4a9d139094d4602b2
+      internalID: -763872033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -2983,6 +3004,7 @@ TextureImporter:
       teste2-objects-recolored-2_13: -562629064
       teste2-objects-recolored-2_130: -457732632
       teste2-objects-recolored-2_131: -1897867887
+      teste2-objects-recolored-2_132: -763872033
       teste2-objects-recolored-2_14: -2117235275
       teste2-objects-recolored-2_15: 1281395848
       teste2-objects-recolored-2_16: -2040341528

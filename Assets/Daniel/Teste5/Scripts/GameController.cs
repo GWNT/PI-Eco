@@ -24,14 +24,16 @@ public class GameController : MonoBehaviour
     public Image tutorialBT;
     public GameObject continuar;
 
-    // Variáveis de controle
+    [Header("Variáveis de controle")]
     public bool GameStarted = false;
     public bool canShowHistory = false;
     public bool showingHistory = false;
     public bool wasShowingHistory = false;
+    public bool noob = false;
     [SerializeField] private Teste2Play playerScript;
     //[SerializeField] private MoveInimigo enemyScript;
     [SerializeField] private ImageColorController PanelController;
+
 
     
 

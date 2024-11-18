@@ -202,6 +202,8 @@ public class Teste2Play : MonoBehaviour
         //Debug.Log("Colidiu com " + collision.gameObject.tag);
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            if (gameController.noob) return;
+
             if (!isInvulnerable)
             {
                 LifeScript.PerderVida(); 
