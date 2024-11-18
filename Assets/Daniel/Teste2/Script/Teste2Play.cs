@@ -190,9 +190,9 @@ public class Teste2Play : MonoBehaviour
     private IEnumerator DisableMovementDuringAttack()
     {
         _canMove = false;
-        _rb.MovePosition(_rb.position + _move.normalized * 0 * Time.fixedDeltaTime);
+        _rb.bodyType = RigidbodyType2D.Static;
         yield return new WaitForSeconds(_attackAnimationDuration);
-        
+        _rb.bodyType = RigidbodyType2D.Dynamic;
         _canMove = true;
         _anim.SetBool("Atacando", false);
 
