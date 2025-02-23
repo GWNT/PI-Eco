@@ -28,7 +28,7 @@ public class TutorialController : MonoBehaviour
 
     void Update()
     {
-        // Verifica se o tutorial est· visÌvel e se qualquer bot„o/tecla foi pressionado
+        // Verifica se o tutorial est√° vis√≠vel e se qualquer bot√£o/tecla foi pressionado
         if (tutorialVisible && gameController.AnyInputDetected())
         {
             HideTutorial();

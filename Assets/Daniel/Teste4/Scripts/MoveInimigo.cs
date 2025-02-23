@@ -6,16 +6,16 @@ using UnityEngine.AI;
 public class MoveInimigo : MonoBehaviour
 {
     [Header("Variáveis de controle personalizáveis")]
-    [SerializeField] int HP = 3;
-    [SerializeField] float _speed = 3;
-    [SerializeField] float _distanSeguir;
-    [SerializeField] float viewRadius = 7f;  // Alcance da visão
-    [SerializeField] float viewAngle = 135f;  // Ângulo da visão
-    [SerializeField] bool Boss = false;
-    [SerializeField] bool BossAtivo = false;
+    [SerializeField] private int HP = 3;
+    [SerializeField] private float _speed = 3;
+    [SerializeField] private float _distanSeguir = 7f;
+    [SerializeField] private float viewRadius = 7f;  // Alcance da visão
+    [SerializeField] private float viewAngle = 135f;  // Ângulo da visão
+    [SerializeField] private bool Boss = false;
+    [SerializeField] private bool BossAtivo = false;
 
     [Header("Variáveis de controle gerais")]
-    public Transform _direcao;
+    public Transform _direcaoSeguindo;
     public GameObject _player;  
     public float _displayer;
     public GameObject lifePrefab;  // Prefab da vida a ser dropada
@@ -23,24 +23,23 @@ public class MoveInimigo : MonoBehaviour
     public Transform[] _pos;
     public Transform visionOrigin; // O GameObject filho
     public Transform BossStart;  // local onde o boss vai aparecer
-    public AudioSource somPurificado;
 
     // Demais variáveis
-    Rigidbody2D _rig2d;
-    Animator _anim;
-    bool _andando;
-    Vector2 direcao;
-    bool _seguindoPlayer = false;
-    int listPos = 0;
-    bool PlayerAlive = true;
-    CapsuleCollider2D _collider;
-    GameController gameController;
+    private Rigidbody2D _rig2d;
+    private Animator _anim;
+    private bool _andando;
+    private Vector2 movimento;
+    private bool _seguindoPlayer = false;
+    private int listPos = 0;
+    private bool PlayerAlive = true;
+    private CapsuleCollider2D _collider;
+    private GameController gameController;
 
 
     void Start()
     {
         _rig2d = GetComponent<Rigidbody2D>();
-        _direcao = _pos[0];
+        _direcaoSeguindo = _pos[0];
         _anim = GetComponent<Animator>();
         _collider = GetComponent<CapsuleCollider2D>();
         gameController = Camera.main.GetComponent<GameController>();
@@ -50,36 +49,17 @@ public class MoveInimigo : MonoBehaviour
             viewRadius = _distanSeguir = 12;
             HP = 10;
             _collider.enabled = false;
-            
         }
     }
 
     void Update()
     {
-        if (!_player.gameObject.activeSelf)
+        if (_player.gameObject.activeSelf == false)
         {
             PlayerAlive = false;
         }
 
-        // Detecta se o player está no campo de visão
-        if (PlayerInSight() && PlayerAlive)
-        {
-            _displayer = Vector2.Distance(transform.position, _player.transform.position);
-            if (_displayer <= _distanSeguir)
-            {
-                if (!gameController.noob)
-                {
-                    _direcao = _player.transform;
-                    _seguindoPlayer = true;
-                }
-            }
-        }
-        else if (_seguindoPlayer)
-        {
-            _seguindoPlayer = false;
-            _direcao = _pos[0];
-            listPos = 0;
-        }
+        SelectTarget();  // Define se o inimigo vai seguir o jogador ou um dos waypoints
 
         if(Boss && !BossAtivo)
         {
@@ -87,33 +67,57 @@ public class MoveInimigo : MonoBehaviour
             if(gameController.purificouTodosInimigos)
             {
                 _speed = 3;
-                _direcao = BossStart;
+                _direcaoSeguindo = BossStart;
             }
         }
 
         // Se não houver obstáculo, mover na direção normal
-        if (_direcao != null)
+        if (_direcaoSeguindo != null)
         {
-            direcao = (_direcao.position - transform.position).normalized;
+            movimento = (_direcaoSeguindo.position - transform.position).normalized;
         }
 
         // Controle de animação
-        _andando = (direcao.x != 0 || direcao.y != 0);
-        if (_andando)
-        {
-            _anim.SetFloat("Horizontal", direcao.x);
-            _anim.SetFloat("Vertical", direcao.y);
-        }
-        _anim.SetBool("Andando", _andando);
+        AnimationController();
 
-        if(Boss && !BossAtivo) return;
-
-        StartCoroutine(VerificaPreso());
+        // if(Boss && !BossAtivo) return;  
+        StartCoroutine(VerificaPreso());  // 
     }
 
     void FixedUpdate()
     {
-        _rig2d.MovePosition(_rig2d.position + direcao * _speed * Time.fixedDeltaTime);
+        _rig2d.MovePosition(_rig2d.position + movimento * _speed * Time.fixedDeltaTime);
+    }
+
+    private void AnimationController()
+    {
+        _andando = movimento.x != 0 || movimento.y != 0;
+        if (_andando)
+        {
+            _anim.SetFloat("Horizontal", movimento.x);
+            _anim.SetFloat("Vertical", movimento.y);
+        }
+        _anim.SetBool("Andando", _andando);
+    }
+
+    private void SelectTarget()
+    {
+        // Detecta se o player está no campo de visão
+        if (PlayerInSight() && PlayerAlive)
+        {
+            _displayer = Vector2.Distance(transform.position, _player.transform.position);
+            if (_displayer <= _distanSeguir && !gameController.pacifico)
+            {
+                _direcaoSeguindo = _player.transform;
+                _seguindoPlayer = true;
+            }
+        }
+        else if (_seguindoPlayer)
+        {
+            _seguindoPlayer = false;
+            _direcaoSeguindo = _pos[0];
+            listPos = 0;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -141,15 +145,15 @@ public class MoveInimigo : MonoBehaviour
     {
         if (!_seguindoPlayer)
         {
-            if (_direcao == _pos[_pos.Length - 1])
+            if (_direcaoSeguindo == _pos[_pos.Length - 1])
             {
                 listPos = 0;
-                _direcao = _pos[0];
+                _direcaoSeguindo = _pos[0];
             }
             else
             {
                 listPos += 1;
-                _direcao = _pos[listPos];
+                _direcaoSeguindo = _pos[listPos];
             }
         }
     }
@@ -164,9 +168,9 @@ public class MoveInimigo : MonoBehaviour
             _displayer = Vector2.Distance(transform.position, _player.transform.position);
             if (!_seguindoPlayer && (_displayer <= _distanSeguir))
             {
-                if (!gameController.noob)
+                if (!gameController.pacifico)
                 {
-                    _direcao = _player.transform;
+                    _direcaoSeguindo = _player.transform;
                     _seguindoPlayer = true;
                 }
                 
@@ -175,7 +179,8 @@ public class MoveInimigo : MonoBehaviour
             if (HP == 0)
             {
                 gameController.inimigosDerrotados += 1;
-                somPurificado.Play();
+                gameController.inimigoPurificado.Play();
+
                 if(Boss)
                 {
                     gameController.bossDerrotado = true;
@@ -186,7 +191,7 @@ public class MoveInimigo : MonoBehaviour
 
                 Instantiate(treePrefab, transform.position, Quaternion.identity);
 
-                if (!gameController.noob)
+                if (!gameController.pacifico)
                 {
                     Instantiate(lifePrefab, transform.position, Quaternion.identity);
                 }
@@ -200,7 +205,7 @@ public class MoveInimigo : MonoBehaviour
         Vector2 directionToPlayer = (_player.transform.position - transform.position).normalized;
 
         // Verifica se o player está dentro do ângulo de visão com base na direção atual
-        if (Vector2.Angle(direcao, directionToPlayer) < viewAngle / 2)
+        if (Vector2.Angle(movimento, directionToPlayer) < viewAngle / 2)
         {
             // Usa uma camada específica para garantir que só o player seja detectado
             LayerMask mask = LayerMask.GetMask("Player");  
@@ -255,7 +260,7 @@ public class MoveInimigo : MonoBehaviour
         if (!angleIsGlobal)
         {
             // Adiciona o ângulo da direção atual (onde o inimigo está olhando)
-            angleInDegrees += Mathf.Atan2(direcao.y, direcao.x) * Mathf.Rad2Deg;
+            angleInDegrees += Mathf.Atan2(movimento.y, movimento.x) * Mathf.Rad2Deg;
         }
         return new Vector3(Mathf.Cos(angleInDegrees * Mathf.Deg2Rad), Mathf.Sin(angleInDegrees * Mathf.Deg2Rad));
     }

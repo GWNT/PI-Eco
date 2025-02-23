@@ -15710,7 +15710,6 @@ MonoBehaviour:
   - {fileID: 641768265}
   visionOrigin: {fileID: 2048552072}
   BossStart: {fileID: 0}
-  somPurificado: {fileID: 2012392970}
 --- !u!50 &110903138
 Rigidbody2D:
   serializedVersion: 4
@@ -17150,7 +17149,6 @@ MonoBehaviour:
   - {fileID: 1935620862}
   visionOrigin: {fileID: 1152219735}
   BossStart: {fileID: 1944228849}
-  somPurificado: {fileID: 2012392970}
 --- !u!50 &239336301
 Rigidbody2D:
   serializedVersion: 4
@@ -17676,7 +17674,6 @@ MonoBehaviour:
   - {fileID: 1280062396}
   visionOrigin: {fileID: 629679962}
   BossStart: {fileID: 0}
-  somPurificado: {fileID: 2012392970}
 --- !u!50 &287468883
 Rigidbody2D:
   serializedVersion: 4
@@ -26689,7 +26686,6 @@ MonoBehaviour:
   - {fileID: 1645275743}
   visionOrigin: {fileID: 847649111}
   BossStart: {fileID: 0}
-  somPurificado: {fileID: 2012392970}
 --- !u!50 &634156480
 Rigidbody2D:
   serializedVersion: 4
@@ -28948,7 +28944,6 @@ MonoBehaviour:
   - {fileID: 719836536}
   visionOrigin: {fileID: 793199528}
   BossStart: {fileID: 0}
-  somPurificado: {fileID: 2012392970}
 --- !u!50 &961170356
 Rigidbody2D:
   serializedVersion: 4
@@ -47890,6 +47885,8 @@ MonoBehaviour:
   backgroundMusic: {fileID: 746359791}
   endingMusic: {fileID: 1697643022}
   playerDeathMusic: {fileID: 1632173216}
+  disparoFlecha: {fileID: 1419975473}
+  inimigoPurificado: {fileID: 2012392970}
   historia:
   - {fileID: 434102814}
   - {fileID: 1734072225}
@@ -47909,7 +47906,7 @@ MonoBehaviour:
   canShowHistory: 0
   showingHistory: 0
   wasShowingHistory: 0
-  noob: 1
+  pacifico: 0
   playerScript: {fileID: 1125504396}
   PanelController: {fileID: 0}
   input: 0
@@ -48224,8 +48221,9 @@ MonoBehaviour:
   knockbackForce: 20
   _arrowPrefab: {fileID: 3604297775096834459, guid: b7c23a0676df98d4d8ab18769d94e19b, type: 3}
   _arrowSpawnPoint: {fileID: 1008077287}
+  _arrowSpeed: 10
+  _shootCooldown: 0.5
   shootDirection: {x: 0, y: 0}
-  _disparoFlecha: {fileID: 1419975473}
 --- !u!50 &1125504397
 Rigidbody2D:
   serializedVersion: 4
@@ -50119,7 +50117,6 @@ MonoBehaviour:
   - {fileID: 665177764}
   visionOrigin: {fileID: 207559682}
   BossStart: {fileID: 0}
-  somPurificado: {fileID: 2012392970}
 --- !u!50 &1428769527
 Rigidbody2D:
   serializedVersion: 4
@@ -51222,7 +51219,6 @@ MonoBehaviour:
   - {fileID: 110342885}
   visionOrigin: {fileID: 233669924}
   BossStart: {fileID: 0}
-  somPurificado: {fileID: 2012392970}
 --- !u!50 &1505902477
 Rigidbody2D:
   serializedVersion: 4
@@ -62607,7 +62603,6 @@ MonoBehaviour:
   - {fileID: 40885465}
   visionOrigin: {fileID: 1365394208}
   BossStart: {fileID: 0}
-  somPurificado: {fileID: 2012392970}
 --- !u!50 &1699612053
 Rigidbody2D:
   serializedVersion: 4

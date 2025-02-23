@@ -7,23 +7,23 @@ using UnityEngine.Pool;
 public class Teste2Play : MonoBehaviour
 {
     [Header("Variáveis do Player")]
-    [SerializeField] float _speed;
-    [SerializeField] Vector2 _move;
+    [SerializeField] private float _speed;
+    [SerializeField] private Vector2 _move;
     [SerializeField] private Vector2 _lastMoveDirection; // armazena a última direção válida
-    [SerializeField] Vector2 _storedMove; // armazena a entrada de movimento enquanto o movimento está bloqueado
-    [SerializeField] float knockbackForce = 20f;
+    [SerializeField] private Vector2 _storedMove; // armazena a entrada de movimento enquanto o movimento está bloqueado
+    [SerializeField] private float knockbackForce = 20f;
 
-    Animator _anim;
-    Rigidbody2D _rb;
-    SpriteRenderer spriteRenderer;
-    bool _andando;
-    bool _canMove = true;
-    bool _canShoot = true; // controla se o player pode disparar
-    float _attackAnimationDuration = 0.4f; 
-    bool isInvulnerable = false;
-    float invulnerableDuration = 1f;
-    int numberOfFlashes = 10;
-    string MoveInput;  // evitar que o player se mova sozinho através de uma verificação
+    private Animator _anim;
+    private Rigidbody2D _rb;
+    private SpriteRenderer spriteRenderer;
+    private bool _andando;
+    private bool _canMove = true;
+    private bool _canShoot = true; 
+    private float _attackAnimationDuration = 0.4f; 
+    private bool isInvulnerable = false;
+    private float invulnerableDuration = 1f;
+    private int numberOfFlashes = 10;
+    private string MoveInput;  // evitar que o player se mova sozinho através de uma verificação
 
     // Script que controla a Life na HUD
     LifeControl LifeScript;
@@ -33,14 +33,12 @@ public class Teste2Play : MonoBehaviour
     ArrowCollision arrowCollisionScript;
 
     [Header("Variáveis da Flecha")]
-    [SerializeField] GameObject _arrowPrefab; 
-    [SerializeField] Transform _arrowSpawnPoint; 
-    float _arrowSpeed = 10f; 
-    float _shootCooldown = 0.5f; 
-    [SerializeField] Vector2 shootDirection;
+    [SerializeField] private GameObject _arrowPrefab; 
+    [SerializeField] private Transform _arrowSpawnPoint; 
+    [SerializeField] private float _arrowSpeed = 10f; 
+    [SerializeField] private float _shootCooldown = 0.5f; 
+    [SerializeField] private Vector2 shootDirection;
 
-    [Header("Áudios")]
-    [SerializeField] AudioSource _disparoFlecha;
 
     void Start()
     {
@@ -55,9 +53,27 @@ public class Teste2Play : MonoBehaviour
 
     void Update()
     {
+        AnimationController();  // Controle de animação
+        
+        if (gameController.pacifico == false)
+        {
+            LifeScript.CheckMorte();  // Verifica se o player morreu
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (_canMove)
+        {
+            _rb.MovePosition(_rb.position + _move.normalized * _speed * Time.fixedDeltaTime);  // move o personagem
+        }
+    }
+
+    private void AnimationController()
+    {
         if (_canMove)
         { 
-            _andando = (_move.x != 0 || _move.y != 0);
+            _andando = _move.x != 0 || _move.y != 0;
 
             if (_andando)
             {
@@ -66,16 +82,6 @@ public class Teste2Play : MonoBehaviour
                 _anim.SetFloat("Vertical", _move.y);
             }
             _anim.SetBool("Andando", _andando);
-        }
-
-        LifeScript.CheckMorte();
-    }
-
-    void FixedUpdate()
-    {
-        if (_canMove)
-        {
-            _rb.MovePosition(_rb.position + _move.normalized * _speed * Time.fixedDeltaTime);  // move o personagem
         }
     }
 
@@ -113,7 +119,7 @@ public class Teste2Play : MonoBehaviour
             ShootArrow();
             StartCoroutine(ShootCooldown()); 
             StartCoroutine(DisableMovementDuringAttack());
-            _disparoFlecha.Play();
+            gameController.disparoFlecha.Play();
         }
     }
 
@@ -205,7 +211,7 @@ public class Teste2Play : MonoBehaviour
         //Debug.Log("Colidiu com " + collision.gameObject.tag);
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            if (gameController.noob) return;
+            if (gameController.pacifico) return;
 
             if (!isInvulnerable)
             {

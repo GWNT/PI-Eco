@@ -22,7 +22,7 @@ public class LifeControl : MonoBehaviour
 
     void Update()
     {
-        if (gameController.noob)
+        if (gameController.pacifico)
         {
             LifeHUD.SetActive(false);
         }
@@ -70,7 +70,8 @@ public class LifeControl : MonoBehaviour
     {
         if (_quantLifes == -1)
         {
-            if (gameController.noob) return;
+            if (gameController.pacifico) return;
+            
             Debug.Log("Player morreu!");
             gameController.playerMorreu = true;
             Player.SetActive(false);

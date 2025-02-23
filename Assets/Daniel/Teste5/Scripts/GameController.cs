@@ -8,34 +8,32 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    [Header("羥dio")]
+    [Header("脕udios")]
     public AudioSource backgroundMusic;
     public AudioSource endingMusic;
     public AudioSource playerDeathMusic;
+    public AudioSource disparoFlecha;
+    public AudioSource inimigoPurificado;
 
-    [Header("Hist髍ia")]
+    [Header("Hist贸ria")]
     public List<GameObject> historia;
     public int currentHistory;
 
-    [Header("Boto鮡s para continuar hist髍ia")]
+    [Header("Bot玫es para continuar hist贸ria")]
     public Sprite xboxBT;
     public Sprite playstationBT;
     public Sprite tecladoBT;
     public Image tutorialBT;
     public GameObject continuar;
 
-    [Header("Vari醰eis de controle")]
+    [Header("Vari谩veis de controle")]
     public bool GameStarted = false;
     public bool canShowHistory = false;
     public bool showingHistory = false;
     public bool wasShowingHistory = false;
-    public bool noob = false;
+    public bool pacifico = false;
     [SerializeField] private Teste2Play playerScript;
-    //[SerializeField] private MoveInimigo enemyScript;
     [SerializeField] private ImageColorController PanelController;
-
-
-    
 
     public bool input = false;
     public int inimigosDerrotados = 0;
@@ -43,7 +41,6 @@ public class GameController : MonoBehaviour
     public bool purificouInimigo = false;
     public bool purificouTodosInimigos = false;
     public bool bossDerrotado = false;
-
     public bool playerMorreu = false;
 
 
@@ -73,7 +70,7 @@ public class GameController : MonoBehaviour
                 HideHistory();
                 currentHistory--;
                 wasShowingHistory = true;
-                Debug.Log("Hist髍ia ocultada devido pausamento.");
+                Debug.Log("Hist贸ria ocultada devido pausamento.");
             }
 
             InputSystem.Update();
@@ -87,7 +84,7 @@ public class GameController : MonoBehaviour
             {
                 StartCoroutine(ShowHistory(currentHistory));
                 wasShowingHistory=false;
-                Debug.Log("Re-exibindo hist髍ia ap髎 pausamento.");
+                Debug.Log("Re-exibindo hist贸ria ap贸s pausamento.");
             }
         }
 
@@ -96,7 +93,7 @@ public class GameController : MonoBehaviour
             canShowHistory = false;
             podeMostrarPrimeiraHistoria = false;
             StartCoroutine(ShowHistory(0));
-            Debug.Log("Exibindo primeira hist髍ia.");
+            Debug.Log("Exibindo primeira hist贸ria.");
         }
 
         if (playerMorreu)
@@ -142,7 +139,7 @@ public class GameController : MonoBehaviour
         if (inimigosDerrotados == 8 && bossDerrotado)
         {
             StartCoroutine(ShowHistory(3));
-            bossDerrotado = false; // evitar repeti玢o
+            bossDerrotado = false; // evitar repeti莽茫o
         }
 
         if (canShowHistory && currentHistory > 3 && currentHistory < 8)
@@ -165,7 +162,7 @@ public class GameController : MonoBehaviour
         showingHistory = true;
         currentHistory = i;
 
-        Debug.Log("Exibindo hist髍ia.");
+        Debug.Log("Exibindo hist贸ria.");
         continuar.SetActive(true);
     }
 
@@ -191,7 +188,7 @@ public class GameController : MonoBehaviour
             return true;
         }
 
-        // Verifica se qualquer bot鉶 foi pressionado no gamepad
+        // Verifica se qualquer bot茫o foi pressionado no gamepad
         if (Gamepad.current != null)
         {
             foreach (var control in Gamepad.current.allControls)
@@ -214,7 +211,7 @@ public class GameController : MonoBehaviour
             return true;
         }
 
-        // Verifica se o bot鉶 sul (A no Xbox, X no PlayStation) foi pressionado no gamepad
+        // Verifica se o bot茫o sul (A no Xbox, X no PlayStation) foi pressionado no gamepad
         if (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame)
         {
             return true;
