@@ -20,29 +20,31 @@ public class MoveInimigo : MonoBehaviour
     public float _displayer;
     public GameObject lifePrefab;  // Prefab da vida a ser dropada
     public GameObject treePrefab;  // Prefab da árvore a ser spawnada
-    public Transform[] _pos;
+    public Transform[] _waypoints;
     public Transform visionOrigin; // O GameObject filho
     public Transform BossStart;  // local onde o boss vai aparecer
 
     // Demais variáveis
-    private Rigidbody2D _rig2d;
-    private Animator _anim;
-    private bool _andando;
-    private Vector2 movimento;
-    private bool _seguindoPlayer = false;
-    private int listPos = 0;
-    private bool PlayerAlive = true;
-    private CapsuleCollider2D _collider;
-    private GameController gameController;
+    [Header("Debug")]
+    public Rigidbody2D _rig2d;
+    public Animator _anim;
+    public bool _andando;
+    public Vector2 movimento;
+    public bool _seguindoPlayer = false;
+    public int listPos = 0;
+    public bool PlayerAlive = true;
+    public CapsuleCollider2D _collider;
+    public GameController gameController;
 
 
     void Start()
     {
         _rig2d = GetComponent<Rigidbody2D>();
-        _direcaoSeguindo = _pos[0];
         _anim = GetComponent<Animator>();
         _collider = GetComponent<CapsuleCollider2D>();
         gameController = Camera.main.GetComponent<GameController>();
+        _direcaoSeguindo = _waypoints[0];
+        
 
         if (Boss)
         {
@@ -54,38 +56,21 @@ public class MoveInimigo : MonoBehaviour
 
     void Update()
     {
-        if (_player.gameObject.activeSelf == false)
-        {
-            PlayerAlive = false;
-        }
-
+        CheckPlayer();  // Verifica se o player está vivo
         SelectTarget();  // Define se o inimigo vai seguir o jogador ou um dos waypoints
-
-        if(Boss && !BossAtivo)
-        {
-            _speed = 0;
-            if(gameController.purificouTodosInimigos)
-            {
-                _speed = 3;
-                _direcaoSeguindo = BossStart;
-            }
-        }
-
-        // Se não houver obstáculo, mover na direção normal
-        if (_direcaoSeguindo != null)
-        {
-            movimento = (_direcaoSeguindo.position - transform.position).normalized;
-        }
-
-        // Controle de animação
-        AnimationController();
-
-        // if(Boss && !BossAtivo) return;  
-        StartCoroutine(VerificaPreso());  // 
+        CheckDeath();  // Verifica se o inimigo foi de Vasco
+        AnimationController();  // Controle de animação
+        StartCoroutine(VerificaPreso());  // Muda de direção se estiver preso no cenário
     }
 
     void FixedUpdate()
     {
+        Move();
+    }
+
+    void Move()
+    {
+        movimento = (_direcaoSeguindo.position - transform.position).normalized;
         _rig2d.MovePosition(_rig2d.position + movimento * _speed * Time.fixedDeltaTime);
     }
 
@@ -98,6 +83,11 @@ public class MoveInimigo : MonoBehaviour
             _anim.SetFloat("Vertical", movimento.y);
         }
         _anim.SetBool("Andando", _andando);
+
+        if (HP == 0)
+        {
+            _anim.SetBool("Morto", true);
+        }
     }
 
     private void SelectTarget()
@@ -112,11 +102,21 @@ public class MoveInimigo : MonoBehaviour
                 _seguindoPlayer = true;
             }
         }
-        else if (_seguindoPlayer)
+        else if (_seguindoPlayer)  // se estava seguindo o player e o player se distanciou demais
         {
             _seguindoPlayer = false;
-            _direcaoSeguindo = _pos[0];
+            _direcaoSeguindo = _waypoints[0];
             listPos = 0;
+        }
+
+        if(Boss && BossAtivo == false)  // se for o Boss
+        {
+            _speed = 0;
+            if(gameController.purificouTodosInimigos)  // libera-o apenas quando todos os demais inimigos forem purificados
+            {
+                _speed = 3;
+                _direcaoSeguindo = BossStart;  // e define o lugar onde ele será "ativo"
+            }
         }
     }
 
@@ -133,28 +133,69 @@ public class MoveInimigo : MonoBehaviour
         
         if(Boss && collision.gameObject.name == "BossStart")
         {
-            Debug.Log("Boss chegou.");
-            BossAtivo = true;
-            _collider.enabled = true;
-            listPos = 0;
-            MudaDirecao();
+            StartBoss();
         }
     }
 
     void MudaDirecao()
     {
-        if (!_seguindoPlayer)
+        if (_seguindoPlayer == false)  // muda a direção apenas se NÃO estiver seguindo o jogador
         {
-            if (_direcaoSeguindo == _pos[_pos.Length - 1])
+            if (_direcaoSeguindo == _waypoints[_waypoints.Length - 1])
             {
                 listPos = 0;
-                _direcaoSeguindo = _pos[0];
+                _direcaoSeguindo = _waypoints[0];
             }
             else
             {
                 listPos += 1;
-                _direcaoSeguindo = _pos[listPos];
+                _direcaoSeguindo = _waypoints[listPos];
             }
+        }
+    }
+
+    void StartBoss()
+    {
+        Debug.Log("Boss chegou.");
+        BossAtivo = true;
+        _collider.enabled = true;
+        listPos = 0;
+        _direcaoSeguindo = _waypoints[listPos];
+        MudaDirecao();
+    }
+
+    void CheckPlayer()
+    {
+        if (_player.gameObject.activeSelf == false)
+        {
+            PlayerAlive = false;
+        }
+    }
+
+    void CheckDeath()
+    {
+        if (HP == 0)
+        {
+            gameController.inimigosDerrotados += 1;
+            Debug.Log(gameController.inimigosDerrotados);  
+            gameController.inimigoPurificado.Play();
+
+            if(Boss)
+            {
+                gameController.bossDerrotado = true;
+            }
+
+            
+            Destroy(gameObject);
+
+            Instantiate(treePrefab, transform.position, Quaternion.identity);
+
+            if (!gameController.pacifico)
+            {
+                Instantiate(lifePrefab, transform.position, Quaternion.identity);
+            }
+
+            Debug.Log("Morreu um");
         }
     }
 
@@ -176,26 +217,7 @@ public class MoveInimigo : MonoBehaviour
                 
             }
 
-            if (HP == 0)
-            {
-                gameController.inimigosDerrotados += 1;
-                gameController.inimigoPurificado.Play();
-
-                if(Boss)
-                {
-                    gameController.bossDerrotado = true;
-                }
-
-                _anim.SetBool("Morto", true);
-                Destroy(gameObject);
-
-                Instantiate(treePrefab, transform.position, Quaternion.identity);
-
-                if (!gameController.pacifico)
-                {
-                    Instantiate(lifePrefab, transform.position, Quaternion.identity);
-                }
-            }
+            
         }
     }
 
@@ -254,7 +276,6 @@ public class MoveInimigo : MonoBehaviour
         }
     }
 
-
     Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
     {
         if (!angleIsGlobal)
@@ -267,6 +288,8 @@ public class MoveInimigo : MonoBehaviour
 
     IEnumerator VerificaPreso()  // função pra verificar se o mob está "preso" em alguma parte do cenário
     {
+        if (Boss && !BossAtivo) yield break;  // Boss só vai tentar mudar de direção se já estiver ativo
+
         Vector2 firstPosition = transform.position;
         yield return new WaitForSeconds(2);
         Vector2 atualPosition = transform.position;

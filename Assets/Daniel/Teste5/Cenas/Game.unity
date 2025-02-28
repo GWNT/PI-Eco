@@ -15650,8 +15650,8 @@ GameObject:
   - component: {fileID: 110903140}
   - component: {fileID: 110903139}
   - component: {fileID: 110903138}
-  - component: {fileID: 110903137}
   - component: {fileID: 110903136}
+  - component: {fileID: 110903137}
   - component: {fileID: 110903142}
   m_Layer: 0
   m_Name: Treant (6)
@@ -15700,16 +15700,25 @@ MonoBehaviour:
   viewAngle: 135
   Boss: 0
   BossAtivo: 0
-  _direcao: {fileID: 0}
+  _direcaoSeguindo: {fileID: 0}
   _player: {fileID: 1125504393}
   _displayer: 0
   lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
   treePrefab: {fileID: 5295914179996125089, guid: 8693a823638578a44ad95e88a2d347b2, type: 3}
-  _pos:
+  _waypoints:
   - {fileID: 1541162305}
   - {fileID: 641768265}
   visionOrigin: {fileID: 2048552072}
   BossStart: {fileID: 0}
+  _rig2d: {fileID: 0}
+  _anim: {fileID: 110903136}
+  _andando: 0
+  movimento: {x: 0, y: 0}
+  _seguindoPlayer: 0
+  listPos: 0
+  PlayerAlive: 1
+  _collider: {fileID: 0}
+  gameController: {fileID: 0}
 --- !u!50 &110903138
 Rigidbody2D:
   serializedVersion: 4
@@ -17089,8 +17098,8 @@ GameObject:
   - component: {fileID: 239336303}
   - component: {fileID: 239336302}
   - component: {fileID: 239336301}
-  - component: {fileID: 239336300}
   - component: {fileID: 239336299}
+  - component: {fileID: 239336300}
   - component: {fileID: 239336305}
   m_Layer: 0
   m_Name: Boss Treant
@@ -17139,16 +17148,25 @@ MonoBehaviour:
   viewAngle: 135
   Boss: 1
   BossAtivo: 0
-  _direcao: {fileID: 0}
+  _direcaoSeguindo: {fileID: 0}
   _player: {fileID: 1125504393}
   _displayer: 0
   lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
   treePrefab: {fileID: 5295914179996125089, guid: 8693a823638578a44ad95e88a2d347b2, type: 3}
-  _pos:
+  _waypoints:
   - {fileID: 719836536}
   - {fileID: 1935620862}
   visionOrigin: {fileID: 1152219735}
   BossStart: {fileID: 1944228849}
+  _rig2d: {fileID: 0}
+  _anim: {fileID: 239336299}
+  _andando: 0
+  movimento: {x: 0, y: 0}
+  _seguindoPlayer: 0
+  listPos: 0
+  PlayerAlive: 1
+  _collider: {fileID: 0}
+  gameController: {fileID: 0}
 --- !u!50 &239336301
 Rigidbody2D:
   serializedVersion: 4
@@ -17613,8 +17631,8 @@ GameObject:
   - component: {fileID: 287468885}
   - component: {fileID: 287468884}
   - component: {fileID: 287468883}
-  - component: {fileID: 287468882}
   - component: {fileID: 287468881}
+  - component: {fileID: 287468882}
   - component: {fileID: 287468887}
   m_Layer: 0
   m_Name: Treant (2)
@@ -17663,17 +17681,26 @@ MonoBehaviour:
   viewAngle: 135
   Boss: 0
   BossAtivo: 0
-  _direcao: {fileID: 0}
+  _direcaoSeguindo: {fileID: 0}
   _player: {fileID: 1125504393}
   _displayer: 0
   lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
   treePrefab: {fileID: 5295914179996125089, guid: 8693a823638578a44ad95e88a2d347b2, type: 3}
-  _pos:
+  _waypoints:
+  - {fileID: 1280062396}
   - {fileID: 1070220933}
   - {fileID: 1645275743}
-  - {fileID: 1280062396}
   visionOrigin: {fileID: 629679962}
   BossStart: {fileID: 0}
+  _rig2d: {fileID: 0}
+  _anim: {fileID: 287468881}
+  _andando: 0
+  movimento: {x: 0, y: 0}
+  _seguindoPlayer: 0
+  listPos: 0
+  PlayerAlive: 1
+  _collider: {fileID: 0}
+  gameController: {fileID: 0}
 --- !u!50 &287468883
 Rigidbody2D:
   serializedVersion: 4
@@ -26575,8 +26602,8 @@ GameObject:
   - component: {fileID: 634156482}
   - component: {fileID: 634156481}
   - component: {fileID: 634156480}
-  - component: {fileID: 634156479}
   - component: {fileID: 634156478}
+  - component: {fileID: 634156479}
   - component: {fileID: 634156477}
   m_Layer: 0
   m_Name: Treant (7)
@@ -26676,16 +26703,25 @@ MonoBehaviour:
   viewAngle: 135
   Boss: 0
   BossAtivo: 0
-  _direcao: {fileID: 0}
+  _direcaoSeguindo: {fileID: 0}
   _player: {fileID: 1125504393}
   _displayer: 0
   lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
   treePrefab: {fileID: 5295914179996125089, guid: 8693a823638578a44ad95e88a2d347b2, type: 3}
-  _pos:
+  _waypoints:
   - {fileID: 641768265}
   - {fileID: 1645275743}
   visionOrigin: {fileID: 847649111}
   BossStart: {fileID: 0}
+  _rig2d: {fileID: 0}
+  _anim: {fileID: 634156478}
+  _andando: 0
+  movimento: {x: 0, y: 0}
+  _seguindoPlayer: 0
+  listPos: 0
+  PlayerAlive: 1
+  _collider: {fileID: 0}
+  gameController: {fileID: 0}
 --- !u!50 &634156480
 Rigidbody2D:
   serializedVersion: 4
@@ -28883,8 +28919,8 @@ GameObject:
   - component: {fileID: 961170358}
   - component: {fileID: 961170357}
   - component: {fileID: 961170356}
-  - component: {fileID: 961170355}
   - component: {fileID: 961170354}
+  - component: {fileID: 961170355}
   - component: {fileID: 961170360}
   m_Layer: 0
   m_Name: Treant (4)
@@ -28933,17 +28969,26 @@ MonoBehaviour:
   viewAngle: 135
   Boss: 0
   BossAtivo: 0
-  _direcao: {fileID: 0}
+  _direcaoSeguindo: {fileID: 0}
   _player: {fileID: 1125504393}
   _displayer: 0
   lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
   treePrefab: {fileID: 5295914179996125089, guid: 8693a823638578a44ad95e88a2d347b2, type: 3}
-  _pos:
+  _waypoints:
+  - {fileID: 719836536}
   - {fileID: 1541162305}
   - {fileID: 40885465}
-  - {fileID: 719836536}
   visionOrigin: {fileID: 793199528}
   BossStart: {fileID: 0}
+  _rig2d: {fileID: 0}
+  _anim: {fileID: 961170354}
+  _andando: 0
+  movimento: {x: 0, y: 0}
+  _seguindoPlayer: 0
+  listPos: 0
+  PlayerAlive: 1
+  _collider: {fileID: 0}
+  gameController: {fileID: 0}
 --- !u!50 &961170356
 Rigidbody2D:
   serializedVersion: 4
@@ -50056,8 +50101,8 @@ GameObject:
   - component: {fileID: 1428769529}
   - component: {fileID: 1428769528}
   - component: {fileID: 1428769527}
-  - component: {fileID: 1428769526}
   - component: {fileID: 1428769525}
+  - component: {fileID: 1428769526}
   - component: {fileID: 1428769531}
   m_Layer: 0
   m_Name: Treant (3)
@@ -50106,17 +50151,25 @@ MonoBehaviour:
   viewAngle: 135
   Boss: 0
   BossAtivo: 0
-  _direcao: {fileID: 0}
+  _direcaoSeguindo: {fileID: 0}
   _player: {fileID: 1125504393}
   _displayer: 0
   lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
   treePrefab: {fileID: 5295914179996125089, guid: 8693a823638578a44ad95e88a2d347b2, type: 3}
-  _pos:
-  - {fileID: 719836536}
+  _waypoints:
   - {fileID: 1935620862}
   - {fileID: 665177764}
   visionOrigin: {fileID: 207559682}
   BossStart: {fileID: 0}
+  _rig2d: {fileID: 0}
+  _anim: {fileID: 1428769525}
+  _andando: 0
+  movimento: {x: 0, y: 0}
+  _seguindoPlayer: 0
+  listPos: 0
+  PlayerAlive: 1
+  _collider: {fileID: 0}
+  gameController: {fileID: 0}
 --- !u!50 &1428769527
 Rigidbody2D:
   serializedVersion: 4
@@ -51158,8 +51211,8 @@ GameObject:
   - component: {fileID: 1505902479}
   - component: {fileID: 1505902478}
   - component: {fileID: 1505902477}
-  - component: {fileID: 1505902476}
   - component: {fileID: 1505902475}
+  - component: {fileID: 1505902476}
   - component: {fileID: 1505902481}
   m_Layer: 0
   m_Name: Treant (5)
@@ -51208,17 +51261,26 @@ MonoBehaviour:
   viewAngle: 135
   Boss: 0
   BossAtivo: 0
-  _direcao: {fileID: 0}
+  _direcaoSeguindo: {fileID: 0}
   _player: {fileID: 1125504393}
   _displayer: 0
   lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
   treePrefab: {fileID: 5295914179996125089, guid: 8693a823638578a44ad95e88a2d347b2, type: 3}
-  _pos:
+  _waypoints:
   - {fileID: 475191262}
   - {fileID: 1898421171}
   - {fileID: 110342885}
   visionOrigin: {fileID: 233669924}
   BossStart: {fileID: 0}
+  _rig2d: {fileID: 0}
+  _anim: {fileID: 1505902475}
+  _andando: 0
+  movimento: {x: 0, y: 0}
+  _seguindoPlayer: 0
+  listPos: 0
+  PlayerAlive: 1
+  _collider: {fileID: 0}
+  gameController: {fileID: 0}
 --- !u!50 &1505902477
 Rigidbody2D:
   serializedVersion: 4
@@ -62563,8 +62625,8 @@ GameObject:
   - component: {fileID: 1699612055}
   - component: {fileID: 1699612054}
   - component: {fileID: 1699612053}
-  - component: {fileID: 1699612052}
   - component: {fileID: 1699612057}
+  - component: {fileID: 1699612052}
   - component: {fileID: 1699612058}
   m_Layer: 0
   m_Name: Treant
@@ -62592,17 +62654,26 @@ MonoBehaviour:
   viewAngle: 135
   Boss: 0
   BossAtivo: 0
-  _direcao: {fileID: 0}
+  _direcaoSeguindo: {fileID: 0}
   _player: {fileID: 1125504393}
   _displayer: 0
   lifePrefab: {fileID: 7676281743859686665, guid: 03b836ef16aadc84498c529cbddfbb28, type: 3}
   treePrefab: {fileID: 5295914179996125089, guid: 8693a823638578a44ad95e88a2d347b2, type: 3}
-  _pos:
+  _waypoints:
   - {fileID: 1898421171}
   - {fileID: 665177764}
   - {fileID: 40885465}
   visionOrigin: {fileID: 1365394208}
   BossStart: {fileID: 0}
+  _rig2d: {fileID: 0}
+  _anim: {fileID: 1699612057}
+  _andando: 0
+  movimento: {x: 0, y: 0}
+  _seguindoPlayer: 0
+  listPos: 0
+  PlayerAlive: 1
+  _collider: {fileID: 0}
+  gameController: {fileID: 0}
 --- !u!50 &1699612053
 Rigidbody2D:
   serializedVersion: 4
