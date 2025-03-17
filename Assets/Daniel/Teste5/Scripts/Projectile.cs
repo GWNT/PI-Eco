@@ -11,10 +11,10 @@ public class Projectile : MonoBehaviour
 
     public void SetSpeed(float speed)
     {
-        rb.velocity = transform.right * speed;
+        rb.velocity = transform.up * speed;
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("Flecha colidiu com: " + collision.gameObject.name);
         if (collision.gameObject.CompareTag("ArrowCollision") || collision.gameObject.CompareTag("Enemy"))

@@ -6,38 +6,43 @@ using UnityEngine.InputSystem;
 public class PlayControl : MonoBehaviour
 {
     [Header("Player variables")]
-    public float moveSpeed = 5f;
-    public Vector2 moveInput;
-    public bool canMove;
-    public bool isWalking = false;
-    public bool canShoot = true;
-    public bool isShooting = false;
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private Vector2 moveInput;
+    [SerializeField] private bool canMove;
+    [SerializeField] private bool isWalking = false;
+    [SerializeField] private bool canShoot = true;
+    [SerializeField] private bool isShooting = false;
+    [SerializeField] private Vector2 shootDirection;
 
     [Header("References")]
-    public Rigidbody2D rb;
-    public Animator animator;
-    public Teste2Play oldScript;
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Animator animator;
+    [SerializeField] private Teste2Play oldScript;
 
     [Header("Arrow variables")]
-    public Transform firePoint;
-    public GameObject arrowPrefab;
-    public float arrowSpeed = 10f;
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private GameObject arrowPrefab;
+    [SerializeField] private float arrowSpeed = 10f;
     
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         oldScript = GetComponent<Teste2Play>();
         animator = GetComponent<Animator>();
+    }
 
+    void Start()
+    {
         canShoot = true;
         canMove = true;
     }
-
 
     void Update()
     {
         oldScript.enabled = false;
         AnimationController();
+        UpdateShootDirection();
+        
     }
 
     void FixedUpdate()
@@ -47,15 +52,21 @@ public class PlayControl : MonoBehaviour
 
     public void SetMove(InputAction.CallbackContext value)
     {
-        moveInput = value.ReadValue<Vector2>();
+        if (canMove && value.performed)
+        {
+            moveInput = value.ReadValue<Vector2>().normalized;
+        }
+        if (value.canceled)
+        {
+            moveInput = Vector2.zero;
+        }
     }
 
     void Move()
     {
         if (!canMove) return;
 
-        rb.velocity = moveInput.normalized * moveSpeed;
-        //rb.MovePosition(rb.position + moveInput.normalized * moveSpeed * Time.fixedDeltaTime);
+        rb.velocity = moveInput * moveSpeed;
     }
 
     public void SetAttack(InputAction.CallbackContext value)
@@ -97,5 +108,27 @@ public class PlayControl : MonoBehaviour
         canMove = true;
         isShooting = false;
         canShoot = true;
+    }
+
+    void UpdateShootDirection()
+    {
+        if (moveInput.x != 0 || moveInput.y != 0)
+        {
+            if (Mathf.Abs(moveInput.x) > Mathf.Abs(moveInput.y))
+            {
+                shootDirection = new Vector2(moveInput.x, 0).normalized;
+            }
+            else
+            {
+                shootDirection = new Vector2(0, moveInput.y).normalized;
+            }
+            UpdateFirePointRotation();
+        }
+    }
+
+    void UpdateFirePointRotation()
+    {
+        float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
+        firePoint.rotation = Quaternion.Euler(0, 0, angle - 90);
     }
 }

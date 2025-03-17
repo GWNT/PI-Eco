@@ -27600,7 +27600,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &746359791
 AudioSource:
   m_ObjectHideFlags: 0
@@ -48182,7 +48182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 8cf9c764b41112b4bb5848e2ddd17050, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: cfd3ff6d027415f4e8f9e6d799a1a9ae, type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -48197,8 +48197,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1125504402}
-        m_TargetAssemblyTypeName: PlayControl, Assembly-CSharp
+      - m_Target: {fileID: 1125504396}
+        m_TargetAssemblyTypeName: Teste2Play, Assembly-CSharp
         m_MethodName: SetMove
         m_Mode: 0
         m_Arguments:
@@ -48209,12 +48209,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: e8319579-a2fa-4487-838f-d14cd9c4cc7e
-    m_ActionName: Player/Movimento[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+    m_ActionId: ee435a12-b051-4d02-8d32-84089a708fd5
+    m_ActionName: Move/Movimento[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1125504402}
-        m_TargetAssemblyTypeName: PlayControl, Assembly-CSharp
+      - m_Target: {fileID: 1125504396}
+        m_TargetAssemblyTypeName: Teste2Play, Assembly-CSharp
         m_MethodName: SetAttack
         m_Mode: 0
         m_Arguments:
@@ -48225,11 +48225,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 7f69559f-2383-421e-b5f5-49d5b7e51e4e
-    m_ActionName: Player/Attack[/Keyboard/space]
+    m_ActionId: 1bec6735-dc12-4214-8ab9-ab0a65d00a22
+    m_ActionName: Move/Ataque[/Mouse/leftButton,/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 591026979}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: PauseOrResume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 39accff6-bf57-4ceb-8d98-f745f67f45a8
+    m_ActionName: Move/Pausa[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Main
-  m_DefaultActionMap: Player
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Move
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &1125504396
@@ -48412,7 +48428,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1125504393}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f4e81a201a9ff64fb7d9f9dc5523e96, type: 3}
   m_Name: 
@@ -48423,6 +48439,7 @@ MonoBehaviour:
   isWalking: 0
   canShoot: 0
   isShooting: 0
+  shootDirection: {x: 0, y: 0}
   rb: {fileID: 0}
   animator: {fileID: 0}
   oldScript: {fileID: 0}
